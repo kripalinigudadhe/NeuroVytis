@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Diet - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Embedded Styling (Matched with styles.css theme) -->
+    <style>
+        /* Hero Background Container */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+}
+
+/* Canvas Behind Content */
+#dashboardAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Keep Text Above the Canvas */
+.cta-section * {
+    position: relative;
+    z-index: 2;
+}
+/* === FAQ SECTION === */
+.faq-section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 4rem 2rem;
+}
+
+.faq-item {
+    background: var(--bg-secondary);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.2rem;
+    transition: 0.3s;
+}
+
+.faq-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.faq-item h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+}
+
+.faq-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+        .btn-login {
+            padding: 0.45rem 1.35rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 3px 10px rgba(39,70,255,0.3);
+            text-decoration: none;
+        }
+
+/* Brain Diet Section */
+.diet-section {
+    max-width: 100%;
+    padding: 2rem;
+    background-color: rgb(220, 233, 244);
+}
+
+.diet-title {
+    font-size: 2.4rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.diet-subtitle {
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Grid */
+.diet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 2rem;
+}
+
+.diet-card {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: 0.3s ease;
+}
+
+.diet-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 36px rgba(39, 70, 255, 0.18);
+}
+
+.diet-icon {
+    font-size: 3rem;
+    margin-bottom: 0.7rem;
+}
+
+.diet-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.diet-card ul {
+    margin-top: 0.8rem;
+    padding-left: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.diet-bottom-text {
+    max-width: 900px;
+    margin: 3rem auto 0;
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+}
+/* =====================================================
+   BRAIN DIET — RECIPE GUIDE STYLING (MATCHED TO styles.css)
+   ===================================================== */
+
+.recipe-section {
+    max-width: 100%;
+    padding: 2rem;
+    background-color: rgb(251, 251, 251);
+}
+
+
+/* Title Styling */
+.diet-title, .recipe-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Subtitle */
+.diet-subtitle, .recipe-subtitle {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 1.7;
+}
+
+/* Recipe Grid */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 2rem;
+   
+}
+
+.recipe-card {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: 0.3s ease;
+    text-align: center;
+ background:  linear-gradient(135deg, #2cbfec, #3853ff);
+}
+
+/* Hover Effect */
+.recipe-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 36px rgba(39, 70, 255, 0.20);
+    border-color: var(--accent);
+}
+
+/* Recipe Image */
+.recipe-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+
+    width: 350px;
+    height: 390px;
+}
+
+/* Recipe Title */
+.recipe-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+    text-align: left;
+}
+
+/* Bullet List */
+.recipe-card ul {
+    padding-left: 1.2rem;
+    color: white;
+    text-align: left;
+    line-height: 1.7;
+    margin-top: 0.6rem;
+}
+
+/* Bottom paragraph */
+.recipe-bottom-text {
+    
+    max-width: 900px;
+    margin: 3rem auto 0;
+    text-align: center;
+    font-size: 1.15rem;
+    color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .recipe-title {
+        font-size: 2rem;
+    }
+    .recipe-subtitle {
+        font-size: 1rem;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="images/logo.png" class="nav-logo-img">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+            <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+            <li><a href="brain-diet.html" class="nav-link active">Brain Diet</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+
+            <a href="login.html" class="btn-login" 
+               style="background: var(--primary-gradient); color:white;">
+               Login
+            </a>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO CTA -->
+ <section class="cta-section">
+    <canvas id="dashboardAnimation"></canvas>
+
+    <h2 class="cta-title">Brain-Boosting Diet</h2>
+    <p class="cta-subtitle">
+      Nutrition plays a powerful role in slowing cognitive decline and protecting neural health.  
+        Explore scientifically proven foods that support memory, focus, and long-term brain resilience.
+    </p></section>
+
+
+<!-- DIET SECTION -->
+<section class="diet-section">
+
+    <h2 class="diet-title">Foods That Improve Brain Health</h2>
+    <p class="diet-subtitle">
+        These nutrient-rich foods are recommended by neurologists and Alzheimer’s researchers.
+        They support cognitive performance, reduce inflammation, and strengthen neural pathways.
+    </p>
+
+    <div class="diet-grid">
+
+        <!-- OMEGA 3 -->
+        <div class="diet-card">
+            <div class="diet-icon">🐟</div>
+            <h3>Omega-3 Rich Foods</h3>
+            <ul>
+                <li>Salmon, tuna, sardines</li>
+                <li>Walnuts & chia seeds</li>
+                <li>Supports memory and neuron repair</li>
+            </ul>
+        </div>
+
+        <!-- ANTIOXIDANTS -->
+        <div class="diet-card">
+            <div class="diet-icon">🫐</div>
+            <h3>Antioxidant Superfoods</h3>
+            <ul>
+                <li>Blueberries, blackberries</li>
+                <li>Dark chocolate (70%+ cacao)</li>
+                <li>Prevents oxidative stress in the brain</li>
+            </ul>
+        </div>
+
+        <!-- MIND DIET -->
+        <div class="diet-card">
+            <div class="diet-icon">🥗</div>
+            <h3>MIND Diet Essentials</h3>
+            <ul>
+                <li>Green leafy vegetables</li>
+                <li>Beans, whole grains</li>
+                <li>Clinically proven to slow cognitive decline</li>
+            </ul>
+        </div>
+
+        <!-- HYDRATION -->
+        <div class="diet-card">
+            <div class="diet-icon">💧</div>
+            <h3>Hydration & Brain Function</h3>
+            <ul>
+                <li>8–10 glasses of water daily</li>
+                <li>Coconut water for electrolytes</li>
+                <li>Boosts focus & neural communication</li>
+            </ul>
+        </div>
+
+        <!-- HERBS -->
+        <div class="diet-card">
+            <div class="diet-icon">🌿</div>
+            <h3>Brain-Boosting Herbs</h3>
+            <ul>
+                <li>Turmeric (curcumin)</li>
+                <li>Ginkgo biloba</li>
+                <li>Improves memory and blood flow</li>
+            </ul>
+        </div>
+
+        <!-- AVOID -->
+        <div class="diet-card">
+            <div class="diet-icon">⚠️</div>
+            <h3>Foods to Avoid</h3>
+            <ul>
+                <li>Processed foods</li>
+                <li>Excess sugar & trans fats</li>
+                <li>Linked to faster brain aging</li>
+            </ul>
+        </div>
+<!-- VITAMINS -->
+<div class="diet-card">
+    <div class="diet-icon">💊</div>
+    <h3>Essential Brain Vitamins</h3>
+    <ul>
+        <li>Vitamin B12 & B6</li>
+        <li>Vitamin D & folate</li>
+        <li>Supports nerve health and cognition</li>
+    </ul>
+</div>
+
+<!-- PROBIOTICS -->
+<div class="diet-card">
+    <div class="diet-icon">🦠</div>
+    <h3>Gut–Brain Friendly Foods</h3>
+    <ul>
+        <li>Yogurt, kefir, fermented foods</li>
+        <li>Kimchi & sauerkraut</li>
+        <li>Enhances mood and brain–gut signaling</li>
+    </ul>
+</div>
+
+    </div>
+
+    <div class="diet-bottom-text">
+        A brain-healthy diet isn’t a restriction — it’s a long-term investment in your memory, clarity, and emotional wellbeing.
+    </div>
+
+</section>
+<!-- RECIPE GUIDE SECTION -->
+<section class="recipe-section">
+
+    <h2 class="diet-title recipe-title">Brain-Boosting Recipe Guide</h2>
+    <p class="diet-subtitle recipe-subtitle">
+        Simple, delicious, science-backed recipes that fuel cognition, memory, and long-term neurological health.
+    </p>
+
+    <div class="recipe-grid">
+
+        <!-- RECIPE 1 -->
+        <div class="recipe-card">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.sgc4NgWw27aAE8Wp8JoZtgHaHa?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3">
+            <h3>Omega-3 Loaded Salmon Bowl</h3>
+            <ul>
+                <li>Rich in DHA for neuron repair</li>
+                <li>Includes quinoa, avocado, spinach</li>
+                <li>Boosts memory & neural communication</li>
+            </ul>
+        </div>
+
+        <!-- RECIPE 2 -->
+        <div class="recipe-card">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.0NY9a63wmD89iWXaT1wmuwHaHa?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3">
+            <h3>Blueberry Antioxidant Smoothie</h3>
+            <ul>
+                <li>Blueberries → reduce oxidative stress</li>
+                <li>Greek yogurt for protein</li>
+                <li>Perfect morning cognition booster</li>
+            </ul>
+        </div>
+
+        <!-- RECIPE 3 -->
+        <div class="recipe-card">
+            <img src="https://www.elizabethrider.com/wp-content/uploads/2022/04/everything-bagel-avocado-toast-copyrightelizabethrider-683x1024.jpg">
+            <h3>Avocado & Walnut Brain Toast</h3>
+            <ul>
+                <li>Walnuts = plant-based Omega-3</li>
+                <li>Avocado improves blood flow</li>
+                <li>Perfect brain-healthy breakfast</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+<!-- CTA Section -->
+<section class="cta-section">
+    <h2 class="cta-title">Strengthen Your Mind with Daily Yoga</h2>
+    <p class="cta-subtitle">
+        Gentle movement and mindful breathing can boost memory, reduce stress, and support long-term brain health.
+    </p>
+    <a href="yoga.html" class="btn btn-primary">Explore Yoga Practices</a>
+</section>
+
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h3 class="footer-title">NeuroVytis</h3>
+            <p class="footer-desc">
+                AI-powered neurological insights, brain visualization, and predictive analytics 
+                to support early detection and cognitive health tracking.
+            </p>
+
+            <div class="footer-socials">
+                <a href="#" class="social-icon">🌐</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">📘</a>
+                <a href="#" class="social-icon">📸</a>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Platform</h4>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="brain-visualizer.html">3D Brain Model</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="ai-risk-predictor.html">AI Predictor</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Support</h4>
+            <ul>
+                <li><a href="help-center.html">Help Center</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Contact</h4>
+            <p>Email: support@neurovytis.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p>Location: Bengaluru, India</p>
+            <a href="contact.html" class="footer-btn">Get in Touch</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>🧠 2025 NeuroVytis — Advancing Brain Health with AI.</p>
+    </div>
+</footer><script>
+const canvas = document.getElementById("dashboardAnimation");
+const ctx = canvas.getContext("2d");
+
+// Resize canvas
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+// Network Nodes (reduced motion + softer appearance)
+let nodes = [];
+let totalNodes = 28; // fewer nodes
+
+for (let i = 0; i < totalNodes; i++) {
+    nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,   // slower movement
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.8 + 1.2,      // smaller nodes
+        opacity: 0.55                        // MUCH lighter opacity
+    });
+}
+
+function animateNetwork() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Softer, fewer connections
+    for (let i = 0; i < totalNodes; i++) {
+        for (let j = i + 1; j < totalNodes; j++) {
+            let dx = nodes[i].x - nodes[j].x;
+            let dy = nodes[i].y - nodes[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist < 120) { // smaller connection range
+                ctx.strokeStyle = "rgba(255,255,255,0.20)"; // softer lines
+                ctx.lineWidth = 0.9;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    // Draw softer nodes
+    nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${n.opacity})`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateNetwork);
+}
+
+animateNetwork();
+</script>
+
+    <script src="script.js"></script>
+</body>
+</html>

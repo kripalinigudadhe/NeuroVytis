@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Memory Flowchart</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: white;
+    text-align: center;
+}
+
+h1 {
+    color: #0b3c5d;
+    margin: 20px;
+}
+
+.flowchart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Common Box */
+.box {
+    background: #0b3c5d;
+    color: white;
+    padding: 15px 25px;
+    margin: 15px;
+    border-radius: 10px;
+    width: 420px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.box small {
+    display: block;
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+/* Vertical Line */
+.line {
+    width: 4px;
+    height: 40px;
+    background: #0b3c5d;
+    position: relative;
+}
+
+/* Arrow Down */
+.line::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: -4px;
+    border: 8px solid transparent;
+    border-top-color: #0b3c5d;
+}
+
+/* Decision Diamond */
+.decision {
+    width: 220px;
+    height: 220px;
+    background: #0b3c5d;
+    transform: rotate(45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.decision span {
+    transform: rotate(-45deg);
+    color: white;
+    font-weight: bold;
+}
+
+/* Branch Section */
+.branch-container {
+    position: relative;
+    width: 900px;
+    height: 250px;
+}
+
+/* Boxes */
+.left-box, .right-box {
+    position: absolute;
+    bottom: 0;
+    width: 300px;
+    background: #0b3c5d;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.left-box { left: 0; }
+.right-box { right: 0; }
+
+/* Diagonal Lines */
+.diagonal {
+    position: absolute;
+    width: 250px;
+    height: 4px;
+    background: #0b3c5d;
+}
+
+/* LEFT arrow */
+.left-line {
+    top: 0;
+    left: 300px;
+    transform: rotate(210deg);
+}
+
+/* RIGHT arrow */
+.right-line {
+    top: 0;
+    right: 300px;
+    transform: rotate(-30deg);
+}
+
+/* Arrowheads */
+.diagonal::after {
+    content: "";
+    position: absolute;
+    right: -6px;
+    top: -6px;
+    border: 8px solid transparent;
+    border-left-color: #0b3c5d;
+}
+
+/* Labels */
+.label {
+    position: absolute;
+    font-weight: bold;
+    color: #0b3c5d;
+}
+
+.yes { left: 350px; top: 10px; }
+.no { right: 350px; top: 10px; }
+
+</style>
+</head>
+
+<body>
+
+<h1>🧠 AI Memory Backup System</h1>
+
+<div class="flowchart">
+
+<div class="box">Start</div>
+<div class="line"></div>
+
+<div class="box">
+📥 Data Collection
+<small>Images • Voice • Notes • Location • External Sources</small>
+</div>
+
+<div class="line"></div>
+
+<div class="box">
+🔍 Data Processing
+<small>OCR • NLP • Emotion Detection • Context</small>
+</div>
+
+<div class="line"></div>
+
+<div class="box">
+🧠 Memory Intelligence
+<small>Memory Graph Creation</small>
+</div>
+
+<div class="line"></div>
+
+<div class="decision">
+<span>Important Memory?</span>
+</div>
+
+<!-- BRANCH -->
+<div class="branch-container">
+
+<div class="diagonal left-line"></div>
+<div class="diagonal right-line"></div>
+
+<div class="label yes">YES</div>
+<div class="label no">NO</div>
+
+<div class="left-box">
+✅ Priority Memory Vault<br>
+<small>Deep Processing</small>
+</div>
+
+<div class="right-box">
+❌ General Storage
+</div>
+
+</div>
+
+<div class="line"></div>
+
+<div class="box">
+🔎 Smart AI Features
+<small>Recall • Emotion Timeline • Prediction • Behavior</small>
+</div>
+
+<div class="line"></div>
+
+<div class="box">
+🚀 Advanced Features
+<small>Life Replay • Second Brain • Health Monitoring</small>
+</div>
+
+<div class="line"></div>
+
+<div class="box">
+📤 Output
+<small>Journal • Reminders • Insights</small>
+</div>
+
+<div class="line"></div>
+
+<div class="box">
+💾 Storage
+<small>Cloud • Local • Vector DB</small>
+</div>
+
+<div class="line"></div>
+
+<div class="box">
+🔐 Security
+<small>Encryption • Blockchain • Permissions</small>
+</div>
+
+<div class="line"></div>
+
+<div class="box">End</div>
+
+</div>
+<div style="width: 100%; max-width: 800px; margin: 0 auto;">
+  <iframe
+    src="https://diagram-generator.com/en/flowchart/create-a-modern-visually-appealing-flowchart-for-an-advanced-ai-system-called-ai-memory-backup-sy-586677?diagram_only=true&hideExplanation=true"
+    width="100%"
+    height="600"
+    frameborder="0"
+    style="border: 1px solid #eee; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"
+    loading="lazy"
+    title="AI Generated Diagram">
+  </iframe>
+  <p style="font-size: 12px; color: #666; text-align: center; margin-top: 8px;">
+    Generated with <a href="https://diagram-generator.com" target="_blank" rel="noopener" style="text-decoration: underline; color: #666;">Diagram Generator AI</a>
+  </p>
+</div>
+</body>
+</html>

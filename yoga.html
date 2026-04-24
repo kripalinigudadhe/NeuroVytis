@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga & Meditation - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+/* HERO SECTION */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+}
+
+#dashboardAnimation {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; z-index: 0;
+}
+
+.cta-section * { position: relative; z-index: 2; }
+
+/* YOGA SECTION */
+.yoga-section {
+    max-width: 1400px;
+    padding: 2rem;
+    margin: auto;
+}
+
+.yoga-title {
+    font-size: 2.4rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.yoga-subtitle {
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.yoga-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 2rem;
+}
+
+.yoga-card {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: 0.3s ease;
+}
+
+.yoga-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 36px rgba(39, 70, 255, 0.20);
+}
+
+.yoga-card img {
+    width: 100%;
+    border-radius: 12px;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.yoga-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.yoga-card ul {
+    padding-left: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.yoga-card a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: underline;
+}
+/* Guided Meditation Section */
+.meditation-section {
+    max-width: 100%;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(189, 189, 253, 0.563);
+}
+
+.meditation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 2rem;
+}
+
+.meditation-card {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+}
+
+.meditation-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 32px rgba(39,70,255,0.18);
+}
+
+.meditation-card h3 {
+    margin-bottom: 0.5rem;
+}
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="images/logo.png" class="nav-logo-img">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+            <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+            <li><a href="yoga.html" class="nav-link active">Yoga</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+
+            <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Login
+                </a>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO CTA -->
+<section class="cta-section">
+    <canvas id="dashboardAnimation"></canvas>
+    <h2 class="cta-title">Yoga & Meditation for Brain Health</h2>
+    <p class="cta-subtitle">
+        These scientifically backed yoga postures help improve memory, reduce stress,  
+        boost neuroplasticity, and support Alzheimer’s prevention.
+    </p>
+</section>
+
+<!-- YOGA SECTION -->
+<section class="yoga-section">
+    <h2 class="yoga-title">Best Yoga Poses for Alzheimer’s Prevention</h2>
+    <p class="yoga-subtitle">
+        These yoga asanas enhance blood flow to the brain, improve mindfulness, and  
+        strengthen cognitive functions that decline with Alzheimer’s.
+    </p>
+
+    <div class="yoga-grid">
+
+        <!-- Tree Pose -->
+        <div class="yoga-card">
+            <img src="https://cdn.yogajournal.com/wp-content/uploads/2022/01/Tree-Pose_Alt-1_2400x1350_Andrew-Clark.jpeg" alt="Tree Pose">
+            <h3>Tree Pose (Vrikshasana)</h3>
+            <ul>
+                <li>Improves balance and concentration</li>
+                <li>Strengthens neural pathways</li>
+            </ul>
+            <a href="https://www.yogajournal.com/poses/tree-pose-2/" target="_blank">Learn More →</a>
+        </div>
+
+        <!-- Tadasana -->
+        <div class="yoga-card">
+            <img src="https://yog4lyf.com/wp-content/uploads/2022/07/747285775-H.webp" alt="Mountain Pose">
+            <h3>Mountain Pose (Tadasana)</h3>
+            <ul>
+                <li>Improves posture & brain oxygen flow</li>
+                <li>Helps reduce stress & anxiety</li>
+            </ul>
+            <a href="https://www.yogaalignmentguide.com/tadasana/" target="_blank">Learn More →</a>
+        </div>
+
+        <!-- Balasana -->
+        <div class="yoga-card">
+            <img src="https://www.theyogacollective.com/wp-content/uploads/2019/10/4143473057707883372_IMG_8546-2-1200x800.jpg" alt="Child Pose">
+            <h3>Child's Pose (Balasana)</h3>
+            <ul>
+                <li>Calms the mind instantly</li>
+                <li>Reduces mental fatigue & improves focus</li>
+            </ul>
+            <a href="https://www.verywellfit.com/childs-pose-balansana-3567188" target="_blank">Learn More →</a>
+        </div>
+
+        <!-- Padmasana -->
+        <div class="yoga-card">
+            <img src="https://usa.inquirer.net/files/2019/01/Padmasana-Benefits-The-Lotus-Pose-Is-More-Than-Just-A-Stretch.jpg" alt="Lotus Pose">
+            <h3>Lotus Pose (Padmasana)</h3>
+            <ul>
+                <li>Boosts memory and emotional stability</li>
+                <li>Enhances concentration & brain relaxation</li>
+            </ul>
+            <a href="https://www.yogajournal.com/poses/lotus-pose/" target="_blank">Learn More →</a>
+        </div>
+
+        <!-- Anulom Vilom -->
+        <div class="yoga-card">
+            <img src="https://global-uploads.webflow.com/5fe33d036237252135e3e74d/625fedf4bf4f6f3bf5608f48_anulom%20vilom%20yoga%20pose%20by%20cult.fit.jpg" alt="Breathing Meditation">
+            <h3>Anulom Vilom (Alternate Breathing)</h3>
+            <ul>
+                <li>Improves cognitive function</li>
+                <li>Reduces brain inflammation & stress</li>
+            </ul>
+            <a href="https://www.artofliving.org/in-en/yoga/breathing-techniques/anulom-vilom" target="_blank">Learn More →</a>
+        </div>
+
+        <!-- Shavasana -->
+        <div class="yoga-card">
+            <img src="https://images.squarespace-cdn.com/content/v1/594a696c20099ea9e1fcb37e/1518703887913-DLPS0S5DDH19HBU2KBOE/shavasana" alt="Shavasana">
+            <h3>Shavasana (Deep Relaxation)</h3>
+            <ul>
+                <li>Resets the nervous system</li>
+                <li>Improves brain clarity & memory</li>
+            </ul>
+            <a href="https://www.yogajournal.com/poses/corpse-pose/" target="_blank">Learn More →</a>
+        </div>
+
+    </div>
+</section>
+<!-- MEDITATION SECTION -->
+<section class="meditation-section">
+
+    <h2 class="yoga-title">Guided Meditation Practices</h2>
+    <p class="yoga-subtitle">
+        Meditation supports neural regeneration, reduces emotional stress, and improves cognitive resilience.
+    </p>
+
+    <div class="meditation-grid">
+
+        <div class="meditation-card">
+            <h3>Mindfulness Breathing</h3>
+            <p>Focus on slow, deep breathing to reduce stress and improve cognitive stability.</p>
+        </div>
+
+        <div class="meditation-card">
+            <h3>5-Minute Memory Meditation</h3>
+            <p>A short session designed to activate the hippocampus and memory circuits.</p>
+        </div>
+
+        <div class="meditation-card">
+            <h3>Guided Relaxation</h3>
+            <p>Progressive relaxation to calm the mind and enhance sleep quality.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h3 class="footer-title">NeuroVytis</h3>
+            <p class="footer-desc">
+                AI-powered neurological insights, brain visualization, and predictive analytics 
+                to support early detection and cognitive health tracking.
+            </p>
+
+            <div class="footer-socials">
+                <a href="#" class="social-icon">🌐</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">📘</a>
+                <a href="#" class="social-icon">📸</a>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Platform</h4>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="brain-visualizer.html">3D Brain Model</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="ai-risk-predictor.html">AI Predictor</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Support</h4>
+            <ul>
+                <li><a href="help-center.html">Help Center</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Contact</h4>
+            <p>Email: support@neurovytis.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p>Location: Bengaluru, India</p>
+            <a href="contact.html" class="footer-btn">Get in Touch</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>🧠 2025 NeuroVytis — Advancing Brain Health with AI.</p>
+    </div>
+</footer>
+
+<script>
+/* Canvas Background Animation */
+const canvas = document.getElementById("dashboardAnimation");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+let nodes = [];
+let totalNodes = 28;
+
+for (let i = 0; i < totalNodes; i++) {
+    nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.8 + 1.2,
+        opacity: 0.55
+    });
+}
+
+function animateNetwork() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < totalNodes; i++) {
+        for (let j = i + 1; j < totalNodes; j++) {
+            let dx = nodes[i].x - nodes[j].x;
+            let dy = nodes[i].y - nodes[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+                ctx.strokeStyle = "rgba(255,255,255,0.20)";
+                ctx.lineWidth = 0.9;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${n.opacity})`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateNetwork);
+}
+
+animateNetwork();
+</script>
+
+</body>
+</html>

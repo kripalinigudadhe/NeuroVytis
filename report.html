@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Report - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <!-- ⭐ NAVBAR ADDED HERE -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+             <li><a href="report.html" class="nav-link active">Reports</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <!-- ⭐ END NAVBAR -->
+
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+         <aside class="sidebar">
+            <h1 style="color: white;">Features</h1>
+            <nav class="sidebar-nav">
+ <a href="profile.html" class="sidebar-link ">👤 Profile</a>
+        <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link">❓ Cognitive Quiz</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle </a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link active">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Brain Health Report Generator</h1>
+                <div class="top-bar-actions">
+                     <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <a href="profile.html" class="btn btn-small">Profile</a>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="report-generator">
+                    
+                   <div class="report-actions">
+    <button class="btn btn-primary" id="generateBtn">Generate Report</button>
+    <button class="btn btn-secondary" id="viewBtn">View Report</button>
+    <button class="btn btn-secondary" id="downloadBtn" disabled>Download PDF</button>
+</div>
+                </div>
+
+                <div class="report-preview" id="reportPreview" style="display: none;">
+                    <div class="report-document">
+                        <div class="report-header">
+                            <h1>NeuroVytis Brain Health Report</h1>
+                            <p class="report-date" id="reportDate"></p>
+                        </div>
+
+                        <div class="report-section">
+                            <h2>Executive Summary</h2>
+                            <p id="reportSummary"></p>
+                        </div>
+<div class="report-section">
+    <h2>Health Trends</h2>
+    <canvas id="reportChart"></canvas>
+</div>
+                        <div class="report-section">
+                            <h2>Health Metrics</h2>
+                            <div class="report-metrics" id="reportMetrics"></div>
+                        </div>
+
+                        <div class="report-section">
+                            <h2>Recommendations</h2>
+                            <ul id="reportRecommendations"></ul>
+                        </div>
+
+                        <div class="report-footer">
+                            <p>This report is generated for informational purposes and should not replace professional medical advice.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="report-generator.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+let chart;
+
+// 🚀 GENERATE REPORT
+document.getElementById("generateBtn").addEventListener("click", async () => {
+
+    const preview = document.getElementById("reportPreview");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    preview.style.display = "block";
+
+    document.getElementById("reportDate").innerText =
+        "Generated on: " + new Date().toLocaleString();
+
+    try {
+        // 🔥 NEW: Single API call
+        const res = await fetch("/full-report");
+        const data = await res.json();
+
+        console.log("📊 FULL REPORT DATA:", data);
+
+        const user = data.user || {};
+        const daily = data.daily || [];
+        const eeg = data.eeg || {};
+        const mri = data.mri || {};
+
+        // =========================
+        // 🧠 EXECUTIVE SUMMARY (SMART)
+        // =========================
+        document.getElementById("reportSummary").innerHTML = `
+            <b>Name:</b> ${user.name || "-"} <br>
+            <b>Age:</b> ${user.age || "-"} | <b>Gender:</b> ${user.gender || "-"} <br>
+            <b>Conditions:</b> ${user.conditions || "None"} <br><br>
+
+            This report analyzes cognitive health trends using behavioral tracking,
+            neurological scans (EEG & MRI), and lifestyle indicators.
+
+            <br><br>
+            <b>Insight:</b> ${
+                (mri.brain_atrophy === "Severe") ?
+                "High neurological risk detected. Immediate attention required." :
+                "No critical neurological abnormality detected. Monitoring recommended."
+            }
+        `;
+
+        // =========================
+        // 📊 GRAPH
+        // =========================
+        const labels = daily.map(d => d.date);
+
+        const memory = daily.map(d => d.memory_issues);
+        const attention = daily.map(d => d.attention_span);
+        const mood = daily.map(d => d.mood);
+
+        const ctx = document.getElementById("reportChart");
+
+        if (chart) chart.destroy();
+
+        chart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels,
+                datasets: [
+                    { label: "Memory", data: memory },
+                    { label: "Attention", data: attention },
+                    { label: "Mood", data: mood }
+                ]
+            }
+        });
+
+        // =========================
+        // 📊 METRICS
+        // =========================
+        const avg = arr => arr.length ? Math.round(arr.reduce((a,b)=>a+b,0)/arr.length) : 0;
+
+        const avgMemory = avg(memory);
+        const avgAttention = avg(attention);
+        const avgMood = avg(mood);
+
+        document.getElementById("reportMetrics").innerHTML = `
+            <div class="metric-card">🧠 Memory: ${avgMemory}</div>
+            <div class="metric-card">🎯 Attention: ${avgAttention}</div>
+            <div class="metric-card">😊 Mood: ${avgMood}</div>
+            <div class="metric-card">⚡ EEG: ${eeg.abnormal_activity || "Normal"}</div>
+            <div class="metric-card">🧬 MRI: ${mri.brain_atrophy || "None"}</div>
+        `;
+
+        // =========================
+        // 💡 SMART RECOMMENDATIONS
+        // =========================
+        let recs = [];
+
+        if (avgMemory < 60) recs.push("🧠 Practice memory exercises daily");
+        if (avgAttention < 60) recs.push("🎯 Try meditation & focus training");
+        if (avgMood < 60) recs.push("😊 Improve emotional well-being");
+
+        if (mri.brain_atrophy === "Severe")
+            recs.push("⚠️ Urgent neurological consultation required");
+
+        if (eeg.abnormal_activity === "Yes")
+            recs.push("⚡ Monitor EEG regularly");
+
+        if (recs.length === 0)
+            recs.push("✅ Brain health stable. Maintain lifestyle");
+
+        document.getElementById("reportRecommendations").innerHTML =
+            recs.map(r => `<li>${r}</li>`).join("");
+
+        downloadBtn.disabled = false;
+
+    } catch (err) {
+        console.error("❌ ERROR:", err);
+        alert("Report generation failed");
+    }
+});
+
+
+// 📥 PROFESSIONAL PDF
+document.getElementById("downloadBtn").addEventListener("click", () => {
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("NeuroVytis Brain Health Report", 20, 20);
+
+    doc.setFontSize(11);
+
+    doc.text("Summary:", 20, 35);
+    doc.text(doc.splitTextToSize(
+        document.getElementById("reportSummary").innerText, 170
+    ), 20, 45);
+
+    doc.text("Metrics:", 20, 110);
+    doc.text(doc.splitTextToSize(
+        document.getElementById("reportMetrics").innerText, 170
+    ), 20, 120);
+
+    doc.text("Recommendations:", 20, 170);
+    doc.text(doc.splitTextToSize(
+        document.getElementById("reportRecommendations").innerText, 170
+    ), 20, 180);
+
+    doc.save("NeuroVytis_Report.pdf");
+});
+</script>
+</body>
+</html>

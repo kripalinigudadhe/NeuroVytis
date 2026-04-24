@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* BOX SPACING FOR ALL SECTIONS */
+        .profile-section,
+        .profile-header,
+        .info-box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px; /* added space between all boxes */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* FLEX ROW FOR PERSONAL + MEDICAL */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px; /* spacing between boxes */
+            margin-bottom: 30px;
+        }
+
+        /* INDIVIDUAL BOXES */
+        .info-box {
+            flex: 1;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media(max-width: 768px) {
+            .info-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-secondary);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-avatar {
+    margin-left: 2rem;
+}
+
+.profile-avatar-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: contain;
+    border: 3px solid transparent;
+    background: var(--primary-gradient);
+    padding: 3px;
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.35);
+}
+
+.profile-header .btn-primary {
+    margin-left: 2rem;
+    white-space: nowrap;
+}
+
+    </style>
+</head>
+<body>
+   
+    <!-- ⭐ NAVBAR ADDED HERE -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+             <li><a href="profile.html" class="nav-link active">Profile</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+               
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <!-- ⭐ END NAVBAR -->
+
+
+    <div class="app-layout">
+
+        <aside class="sidebar">
+            <h1 style="color: white;">Features</h1>
+            <nav class="sidebar-nav">
+                <a href="profile.html" class="sidebar-link active ">👤 Profile</a>
+        <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle </a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">User Profile</h1>
+                <div class="top-bar-actions">
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <button class="btn btn-small" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+
+            <div class="container">
+
+              <!-- Profile Header Section -->
+<div class="profile-header">
+
+    <!-- LEFT: User Info -->
+    <div class="profile-info">
+        <h2 id="userName">John Doe</h2>
+        <p class="user-role">Health Monitor</p>
+        <p class="user-email" id="userEmail">john.doe@example.com</p>
+
+        <div class="profile-status">
+            <span class="status-badge healthy">Active Member</span>
+              <button class="btn btn-primary" id="editProfileBtn">Edit Profile</button>
+        </div>
+    </div>
+
+    <!-- RIGHT: Avatar Image -->
+    <div class="profile-avatar">
+        <img src="images/profile-avatar.png" alt="Profile Avatar" class="profile-avatar-img">
+    </div>
+
+  
+</div>
+
+
+                <!-- Health Statistics -->
+                <section class="profile-section">
+                    <h3>Health Statistics</h3>
+
+                    <div class="stats-grid" style="
+                        display: grid;
+                        grid-template-columns: repeat(4, 150px);
+                        gap: 20px;
+                        justify-content: flex-start;
+                    ">
+                        <div class="stat-card" style="
+                            width:150px;
+                            height:150px;
+                            display:flex;
+                            flex-direction:column;
+                            justify-content:center;
+                            align-items:center;
+                            text-align:center;
+                        ">
+                            <div class="stat-icon">🧠</div>
+                            <span class="stat-label">Health Index</span>
+                            <span class="stat-value" id="brainHealthIndex">78</span>
+                        </div>
+
+                        <div class="stat-card" style="
+                            width:150px;
+                            height:150px;
+                            display:flex;
+                            flex-direction:column;
+                            justify-content:center;
+                            align-items:center;
+                            text-align:center;
+                        ">
+                            <div class="stat-icon">📊</div>
+                            <span class="stat-label">Memory</span>
+                            <span class="stat-value" id="memoryScore">85%</span>
+                        </div>
+
+                        <div class="stat-card" style="
+                            width:150px;
+                            height:150px;
+                            display:flex;
+                            flex-direction:column;
+                            justify-content:center;
+                            align-items:center;
+                            text-align:center;
+                        ">
+                            <div class="stat-icon">🎯</div>
+                            <span class="stat-label">Focus</span>
+                            <span class="stat-value" id="focusLevel">72%</span>
+                        </div>
+
+                        <div class="stat-card" style="
+                            width:150px;
+                            height:150px;
+                            display:flex;
+                            flex-direction:column;
+                            justify-content:center;
+                            align-items:center;
+                            text-align:center;
+                        ">
+                            <div class="stat-icon">⏱️</div>
+                            <span class="stat-label">Days</span>
+                            <span class="stat-value" id="analysisDays">45</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SIDE-BY-SIDE PERSONAL + MEDICAL INFO -->
+                <div class="info-row">
+                    
+                    <!-- Personal Info -->
+                    <section class="profile-section info-box">
+                        <div class="section-header">
+                            <h3>Personal Information</h3>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-item"><span class="info-label">Full Name - </span><span class="info-value" id="infoName">John Doe</span></div>
+                            <div class="info-item"><span class="info-label">Email - </span><span class="info-value" id="infoEmail">john.doe@example.com</span></div>
+                            <div class="info-item"><span class="info-label">Phone - </span><span class="info-value" id="infoPhone">+1 (555) 123-4567</span></div>
+                            <div class="info-item"><span class="info-label">Age - </span><span class="info-value" id="infoDOB">Jan 15, 1990</span></div>
+                            <div class="info-item"><span class="info-label">Gender - </span><span class="info-value" id="infoGender">Male</span></div>
+                            <div class="info-item"><span class="info-label">Location - </span><span class="info-value" id="infoLocation">San Francisco, CA</span></div>
+                        </div>
+                    </section>
+
+                    <!-- Medical Info -->
+                    <section class="profile-section info-box">
+                        <div class="section-header">
+                            <h3>Medical Information</h3>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-item"><span class="info-label">Blood Type - </span><span class="info-value">O+</span></div>
+                            <div class="info-item"><span class="info-label">Last Check-up - </span><span class="info-value">Nov 10, 2025</span></div>
+                            <div class="info-item"><span class="info-label">Risk Level - </span><span class="info-value risk-low">Low Risk</span></div>
+                            <div class="info-item"><span class="info-label">Health Status - </span><span class="info-value status-healthy">Healthy</span></div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Recent Activities -->
+                <section class="profile-section">
+                    <h3>Recent Activities</h3>
+                    <div class="activities-list">
+                        <div class="activity-item"><div class="activity-icon">✅</div><div class="activity-details"><span class="activity-title">Completed Cognitive Quiz</span><span class="activity-time">2 hours ago</span></div><span class="activity-score">Score: 92/100</span></div>
+
+                        <div class="activity-item"><div class="activity-icon">📊</div><div class="activity-details"><span class="activity-title">Brain Analysis Updated</span><span class="activity-time">1 day ago</span></div><span class="activity-score">Health Index: 78</span></div>
+
+                        <div class="activity-item"><div class="activity-icon">📤</div><div class="activity-details"><span class="activity-title">MRI Data Uploaded</span><span class="activity-time">3 days ago</span></div><span class="activity-score">File Size: 245MB</span></div>
+
+                        <div class="activity-item"><div class="activity-icon">🤖</div><div class="activity-details"><span class="activity-title">AI Risk Assessment</span><span class="activity-time">5 days ago</span></div><span class="activity-score">Risk Score: 15%</span></div>
+
+                        <div class="activity-item"><div class="activity-icon">📈</div><div class="activity-details"><span class="activity-title">Generated Report</span><span class="activity-time">1 week ago</span></div><span class="activity-score">Monthly Summary</span></div>
+                    </div>
+                </section>
+
+                <!-- Account Settings -->
+                <section class="profile-section">
+                    <h3>Account Settings</h3>
+                    <div class="settings-actions">
+                        <div class="setting-action-item"><div><span class="setting-title">Change Password</span><span class="setting-desc">Update your password</span></div><button class="btn btn-secondary btn-small" style="color: #2E4BFF;">Change</button></div>
+
+                        <div class="setting-action-item"><div><span class="setting-title">Two-Factor Authentication</span><span class="setting-desc">Extra security</span></div><button class="btn btn-secondary btn-small"style="color: #2E4BFF;">Enable</button></div>
+
+                        <div class="setting-action-item"><div><span class="setting-title">Download Your Data</span><span class="setting-desc">Export JSON</span></div><button class="btn btn-secondary btn-small" style="color: #2E4BFF;">Download</button></div>
+
+                        <div class="setting-action-item danger"><div><span class="setting-title">Delete Account</span><span class="setting-desc">Permanent action</span></div><button class="btn btn-danger btn-small" >Delete</button></div>
+                    </div>
+                </section>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <!-- <script src="profile.js"></script> -->
+    <script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+    try {
+        const response = await fetch("http://localhost:5000/getLoggedUser");
+        const data = await response.json();
+
+        if (!data.success) {
+            alert("Please login first.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const user = data.user;
+
+        // ⭐ FILL PROFILE HEADER
+        document.getElementById("userName").textContent = user.name;
+        document.getElementById("userEmail").textContent = user.email;
+
+        // ⭐ PERSONAL INFO
+        document.getElementById("infoName").textContent = user.name;
+        document.getElementById("infoEmail").textContent = user.email;
+        document.getElementById("infoPhone").textContent = user.phone;
+        document.getElementById("infoGender").textContent = user.gender;
+        document.getElementById("infoDOB").textContent = user.age + " years";
+        document.getElementById("infoLocation").textContent = "Not Provided";
+
+        // ⭐ HEALTH METRICS (STATIC - YOU CAN UPDATE LATER)
+        document.getElementById("brainHealthIndex").textContent = "78";
+        document.getElementById("memoryScore").textContent = "85%";
+        document.getElementById("focusLevel").textContent = "72%";
+        document.getElementById("analysisDays").textContent = "45";
+
+        // ⭐ MEDICAL INFO
+        document.querySelector(".risk-low").textContent = user.conditions || "N/A";
+        document.querySelector(".status-healthy").textContent = user.family_history || "N/A";
+
+    } catch (error) {
+        console.error(error);
+    }
+
+    // ⭐ LOGOUT BUTTON — DESTROY SESSION
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+        await fetch("http://localhost:5000/logout", { method: "POST" });
+        window.location.href = "login.html";
+    });
+});
+</script>
+
+</body>
+</html>

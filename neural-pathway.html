@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Pathways - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+.sketchfab-embed-wrapper, 
+.sketchfab-embed-wrapper iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+    border-radius: 1rem;
+}
+</style>
+
+
+    <style>
+/* ========= NEURAL CANVAS SECTION ========= */
+.neural-visualization {
+    background: #060123;
+    border-radius: 1rem;
+    padding: 1rem;
+    height: 480px;
+    position: relative;
+    box-shadow: 0 0 25px rgba(0,255,255,0.15);
+}
+
+#neuralCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* ========= NEW INFO SECTIONS ========= */
+
+.neural-info-section {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+}
+
+/* Section Title */
+.info-title {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* Sub Box */
+.info-box {
+    background: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.info-box h3 {
+    margin-bottom: .5rem;
+    color: var(--text-primary);
+}
+
+/* Neurotransmitter section */
+.nt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1rem;
+}
+
+.nt-card {
+    background: var(--bg-primary);
+    border-radius: .8rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.nt-card h4 {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.health-bar {
+    margin-top: .5rem;
+    width: 100%;
+    height: 8px;
+    border-radius: 1rem;
+    background: #222;
+    overflow: hidden;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00FFAA, #00C2FF);
+}
+
+/* ========= SIGNAL STATUS LIST ========= */
+.signal-status {
+    margin-top: 1rem;
+}
+
+.signal-item {
+    display: flex;
+    justify-content: space-between;
+    padding: .8rem 1rem;
+    border-radius: .8rem;
+    margin-bottom: .7rem;
+    font-weight: 600;
+}
+
+.signal-item.healthy {
+    background: rgba(0,255,180,0.12);
+    border: 1px solid rgba(0,255,180,0.4);
+}
+
+.signal-item.warning {
+    background: rgba(255,205,0,0.12);
+    border: 1px solid rgba(255,205,0,0.4);
+}
+
+.signal-item.danger {
+    background: rgba(255,80,80,0.12);
+    border: 1px solid rgba(255,80,80,0.4);
+}
+
+/* ==========================
+   NEURAL GRAPH SECTION
+   ========================== */
+.neural-graph-section {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+}
+
+#neuralGraph {
+    width: 100% !important;
+    height: 320px !important;
+}
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+
+        <div class="nav-logo">
+            <img src="images/logo.png" class="nav-logo-img">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+            <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                   <li><a href="neural-pathway.html" class="nav-link active">Neural Pathway</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+    
+        
+          <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                   Logout
+                </a></ul>
+    </div>
+</nav>
+
+<div class="app-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <h1 style="color:white;">Features</h1>
+
+    <nav class="sidebar-nav">
+          <a href="profile.html" class="sidebar-link">👤 Profile</a>
+                <a href="neural-pathway.html" class="sidebar-link active">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle </a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link ">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <div class="top-bar">
+        <h1 class="page-title">Neural Pathway Visualization</h1>
+          <div class="top-bar-actions">
+                     <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <a href="profile.html" class="btn btn-small">Profile</a>
+                </div>
+    </div>
+
+    <div class="container">
+        <div class="neural-visualization">
+   <div class="sketchfab-embed-wrapper">
+       <iframe 
+           title="Neuronal Cell Environment"
+           allowfullscreen 
+           mozallowfullscreen="true"
+           webkitallowfullscreen="true"
+           allow="autoplay; fullscreen; xr-spatial-tracking"
+           src="https://sketchfab.com/models/11fc6dbcc1594e9a806601bb7480f315/embed">
+       </iframe>
+   </div>
+</div>
+ </div>
+
+        <!-- =============== NEURAL GRAPH SECTION =============== -->
+        <div class="neural-graph-section">
+            <h2 class="info-title">Neural Activity Graph</h2>
+            <canvas id="neuralGraph"></canvas>
+        </div>
+
+        <!-- ========= SIGNAL STATUS ========= -->
+        <div class="neural-info-section">
+            <h2 class="info-title">Signal Transmission Overview</h2>
+
+            <div class="signal-status">
+                <div class="signal-item healthy">
+                    <span>Frontal Lobe Connectivity</span>
+                    <span>92% Functional</span>
+                </div>
+                <div class="signal-item warning">
+                    <span>Temporal Lobe Connectivity</span>
+                    <span>74% Functional</span>
+                </div>
+                <div class="signal-item danger">
+                    <span>Hippocampal Synapses</span>
+                    <span>54% Functional</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========= COGNITIVE FUNCTIONS ========= -->
+        <div class="neural-info-section">
+            <h2 class="info-title">Cognitive Function Breakdown</h2>
+
+            <div class="info-box">
+                <h3>Memory Formation</h3>
+                <p>Hippocampal pathways show moderate synaptic weakening affecting short-term retention.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Decision Making</h3>
+                <p>Frontal lobe neural loops are strong, maintaining high reasoning performance.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Language Processing</h3>
+                <p>Temporal lobe nodes show mild degradation impacting word recall speed.</p>
+            </div>
+        </div>
+
+        <!-- ========= NEUROTRANSMITTER PANEL ========= -->
+        <div class="neural-info-section">
+            <h2 class="info-title">Key Neurotransmitters</h2>
+
+            <div class="nt-grid">
+
+                <div class="nt-card">
+                    <h4>Dopamine</h4>
+                    <p>Motivation, reward, focus</p>
+                    <div class="health-bar"><div class="health-fill" style="width:82%;"></div></div>
+                </div>
+
+                <div class="nt-card">
+                    <h4>Serotonin</h4>
+                    <p>Mood stability, cognition</p>
+                    <div class="health-bar"><div class="health-fill" style="width:76%;"></div></div>
+                </div>
+
+                <div class="nt-card">
+                    <h4>Acetylcholine</h4>
+                    <p>Memory encoding, learning</p>
+                    <div class="health-bar"><div class="health-fill" style="width:58%;"></div></div>
+                </div>
+
+                <div class="nt-card">
+                    <h4>Glutamate</h4>
+                    <p>Neural activation & plasticity</p>
+                    <div class="health-bar"><div class="health-fill" style="width:67%;"></div></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+</div>
+
+
+<!-- ======================
+     CANVAS ANIMATION SCRIPT
+     ====================== -->
+<script>
+const canvas = document.getElementById("neuralCanvas");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+// ===== Colors =====
+const COLORS = {
+    neuronGlow: ["#2CBFEC", "#3853FF", "#8A1CEA"],
+    synapseFire: "#FF9E3D",
+    connectionGlow: "rgba(44,191,236,0.25)",
+    background: "#080B20"
+};
+
+canvas.style.background = COLORS.background;
+
+// ===== Nodes =====
+let nodes = [];
+let totalNodes = 36;
+
+for (let i = 0; i < totalNodes; i++) {
+    nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        pulse: Math.random() * 40,
+        color: COLORS.neuronGlow[Math.floor(Math.random() * COLORS.neuronGlow.length)]
+    });
+}
+
+// ===== Animation =====
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Connections
+    nodes.forEach((a, i) => {
+        for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 180) {
+                ctx.strokeStyle = COLORS.connectionGlow;
+                ctx.lineWidth = 1.2 + Math.random() * 0.4;
+
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.stroke();
+            }
+
+            if (dist < 110 && Math.random() < 0.005) {
+                ctx.beginPath();
+                ctx.arc((a.x + b.x) / 2, (a.y + b.y) / 2, 4, 0, 2 * Math.PI);
+                ctx.fillStyle = COLORS.synapseFire;
+                ctx.shadowBlur = 25;
+                ctx.shadowColor = COLORS.synapseFire;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+    });
+
+    // Nodes
+    nodes.forEach(n => {
+        n.pulse += 0.07;
+
+        const size = 6 + Math.sin(n.pulse) * 2;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, size, 0, 2 * Math.PI);
+        ctx.fillStyle = n.color;
+        ctx.shadowBlur = 30;
+        ctx.shadowColor = n.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+<!-- ======================
+     CHART.JS NEURAL GRAPH
+     ====================== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctxGraph = document.getElementById("neuralGraph").getContext("2d");
+
+const gradient = ctxGraph.createLinearGradient(0, 0, 0, 300);
+gradient.addColorStop(0, "rgba(44,191,236,0.5)");
+gradient.addColorStop(1, "rgba(138,28,234,0.1)");
+
+new Chart(ctxGraph, {
+    type: "line",
+    data: {
+        labels: ["0s","1s","2s","3s","4s","5s","6s","7s"],
+        datasets: [{
+            label: "Neural Firing Rate (Hz)",
+            data: [42,58,67,54,73,82,70,95],
+            borderColor: "#2cbfec",
+            backgroundColor: gradient,
+            borderWidth: 3,
+            pointRadius: 5,
+            pointBackgroundColor: "#8A1CEA",
+            tension: 0.4,
+            fill: true,
+            shadowBlur: 20
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: { beginAtZero: false, grid: { color: "rgba(255,255,255,0.08)" }},
+            x: { grid: { color: "rgba(255,255,255,0.05)" }}
+        },
+        plugins: {
+            legend: { labels: { color: "#fff" }}
+        }
+    }
+});
+</script>
+
+</body>
+</html>

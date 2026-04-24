@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+
+<style>
+    
+    .btn-login {
+        padding: 0.45rem 1.35rem;
+        border-radius: 2rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+        background: var(--primary-gradient);
+        color: white;
+        box-shadow: 0 3px 10px rgba(39,70,255,0.3);
+        text-decoration: none;
+    }
+    
+    .cta-section {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+    }
+    #dashboardAnimation {
+        position: absolute; top: 0; left: 0;
+        width: 100%; height: 100%; z-index: 0;
+    }
+    .cta-section * { position: relative; z-index: 2; }
+
+    .symptom-box {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .symptom-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+    }
+
+    .symptom-option {
+        padding: 1rem;
+        border-radius: 0.7rem;
+        background: var(--glass);
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    .symptom-option:hover {
+        transform: scale(1.03);
+        border-color: var(--primary);
+    }
+
+    #resultBox {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: var(--glass);
+        border-radius: 1rem;
+        display: none;
+    }
+
+    .info-section {
+        background: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border-color);
+        margin-top: 3rem;
+    }
+</style>
+</head>
+
+<body class="symptom-page">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="images/logo.png" class="nav-logo-img">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+            <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+        <li><a href="symptom-checker.html" class="nav-link active">Symptoms</a></li>
+              <li><a href="about.html" class="nav-link">About</a></li>
+           
+            <a href="login.html" class="btn-login">Login</a>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="cta-section">
+    <canvas id="dashboardAnimation"></canvas>
+    <h2 class="cta-title">Alzheimer Symptom Checker</h2>
+    <p class="cta-subtitle">Identify early warning signs and receive AI-backed insights.</p>
+</section>
+
+<div class="container">
+    <h1 class="page-title">Select Observed Symptoms</h1>
+
+    <div class="symptom-box">
+        <h3>Common Cognitive Symptoms</h3>
+
+       <div class="symptom-grid">
+
+    <!-- Memory -->
+    <label class="symptom-option"><input type="checkbox" value="Short-term memory loss"> Short-term memory loss</label>
+    <label class="symptom-option"><input type="checkbox" value="Repeating questions"> Repeating questions</label>
+    <label class="symptom-option"><input type="checkbox" value="Forgetting recent events"> Forgetting recent events</label>
+
+    <!-- Language -->
+    <label class="symptom-option"><input type="checkbox" value="Difficulty finding words"> Difficulty finding words</label>
+    <label class="symptom-option"><input type="checkbox" value="Trouble following conversations"> Trouble following conversations</label>
+
+    <!-- Cognitive / Executive -->
+    <label class="symptom-option"><input type="checkbox" value="Poor judgment"> Poor judgment</label>
+    <label class="symptom-option"><input type="checkbox" value="Difficulty planning tasks"> Difficulty planning tasks</label>
+
+    <!-- Orientation -->
+    <label class="symptom-option"><input type="checkbox" value="Getting lost in familiar places"> Getting lost in familiar places</label>
+    <label class="symptom-option"><input type="checkbox" value="Confusion about time or place"> Confusion about time or place</label>
+
+    <!-- Behavioral -->
+    <label class="symptom-option"><input type="checkbox" value="Personality changes"> Personality changes</label>
+    <label class="symptom-option"><input type="checkbox" value="Social withdrawal"> Social withdrawal</label>
+    <label class="symptom-option"><input type="checkbox" value="Mood swings"> Mood swings</label>
+
+    <!-- Motor -->
+    <label class="symptom-option"><input type="checkbox" value="Poor coordination"> Poor coordination</label>
+    <label class="symptom-option"><input type="checkbox" value="Slower movements"> Slower movements</label>
+
+</div>
+
+<!-- OTHER SYMPTOMS -->
+<div style="margin-top:1.5rem;">
+    <label><strong>Other symptoms (if any):</strong></label>
+    <textarea id="customSymptoms" class="input"
+        placeholder="Describe symptoms not listed above..."
+        style="width:100%; min-height:90px;"></textarea>
+</div>
+
+<button class="btn btn-primary" onclick="analyzeSymptoms()" style="margin-top:1.5rem;">
+    Analyze with AI
+</button>
+
+    <div id="resultBox"></div>
+<!-- Enhanced Informative Section -->
+<div class="info-section">
+
+    <h2 class="info-title">Why Symptom Checking Matters</h2>
+    <p class="info-subtext">
+        Alzheimer’s often begins silently — with subtle cognitive and behavioral changes.
+        Understanding these early patterns empowers individuals and families to take action sooner.
+    </p>
+
+    <!-- 3-Card Grid -->
+    <div class="info-grid">
+
+        <div class="info-card">
+            
+            <h4>🧠 Early Detection</h4>
+            <p>Identifying cognitive changes early can slow decline using lifestyle and medical intervention.</p>
+        </div>
+<br>
+        <div class="info-card">
+        
+            <h4>📊 Better Outcomes</h4>
+            <p>Tracking symptoms helps monitor progress and supports timely medical decisions.</p>
+        </div>
+<br>
+        <div class="info-card">
+            <div class="info-icon"></div>
+            <h4>🛡️ Personal Awareness</h4>
+            <p>Recognizing risk factors early gives patients control over their cognitive health journey.</p>
+        </div>
+<br>
+    </div>
+
+   <!-- Highlight Box -->
+<div class="highlight-box">
+    <h3>Next Step in Your Cognitive Assessment</h3>
+    <p>
+        For a deeper understanding of your brain health, enhance your analysis using our
+            AI Risk Predictor
+        </a>.
+    </p>
+    <!-- Primary Button -->
+    <a href="ai-risk-predictor.html" class="btn btn-primary highlight-primary-btn" style=".highlight-primary-btn {
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+}
+">
+        Open AI Risk Predictor 
+    </a>
+</div>
+
+
+</div>
+
+</div>
+
+
+            
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+  <!-- FOOTER --> 
+
+
+
+<!-- WORKING JS LOGIC -->
+<script>
+async function analyzeSymptoms() {
+    const checked = [...document.querySelectorAll("input[type='checkbox']:checked")];
+    const resultBox = document.getElementById("resultBox");
+
+    if (checked.length === 0) {
+        resultBox.style.display = "block";
+        resultBox.innerHTML = `
+            <h3>No Symptoms Selected</h3>
+            <p>Please choose at least one symptom.</p>`;
+        return;
+    }
+
+    const symptoms = checked.map(s => s.value);
+
+    resultBox.style.display = "block";
+    resultBox.innerHTML = "⏳ Analyzing symptoms using AI...";
+
+    try {
+        const res = await fetch("http://localhost:5000/analyze-symptoms", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                symptoms: symptoms,
+                customSymptoms: ""
+            })
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+            resultBox.innerHTML = "❌ Unable to analyze symptoms right now. Please try again later.";
+            return;
+        }
+
+        resultBox.innerHTML = `
+            <h3>🧠 AI Symptom Analysis</h3>
+            <pre style="white-space:pre-wrap; font-family:inherit;">
+${data.analysis}
+            </pre>
+            <p style="margin-top:1rem;">
+                ⚠️ This is not a medical diagnosis. Consult a healthcare professional.
+            </p>
+        `;
+
+    } catch (err) {
+        console.error(err);
+        resultBox.innerHTML = "❌ Server error. Please try again later.";
+    }
+}
+</script>
+
+
+<!-- HERO ANIMATION -->
+<script>
+const canvas = document.getElementById("dashboardAnimation");
+const ctx = canvas.getContext("2d");
+
+// Resize canvas
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+// Network Nodes
+let nodes = [];
+let totalNodes = 28;
+
+for (let i = 0; i < totalNodes; i++) {
+    nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.8 + 1.2,
+        opacity: 0.55
+    });
+}
+
+function animateNetwork() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < totalNodes; i++) {
+        for (let j = i + 1; j < totalNodes; j++) {
+            let dx = nodes[i].x - nodes[j].x;
+            let dy = nodes[i].y - nodes[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+                ctx.strokeStyle = "rgba(255,255,255,0.20)";
+                ctx.lineWidth = 0.9;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${n.opacity})`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateNetwork);
+}
+
+animateNetwork();
+</script>
+
+<script src="script.js"></script>
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h3 class="footer-title">NeuroVytis</h3>
+            <p class="footer-desc">
+                AI-powered neurological insights, brain visualization, and predictive analytics 
+                to support early detection and cognitive health tracking.
+            </p>
+
+            <div class="footer-socials">
+                <a href="#" class="social-icon">🌐</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">📘</a>
+                <a href="#" class="social-icon">📸</a>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Platform</h4>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="brain-visualizer.html">3D Brain Model</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="ai-risk-predictor.html">AI Predictor</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Support</h4>
+            <ul>
+                <li><a href="help-center.html">Help Center</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Contact</h4>
+            <p>Email: support@neurovytis.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p>Location: Bengaluru, India</p>
+            <a href="contact.html" class="footer-btn">Get in Touch</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>🧠 2025 NeuroVytis — Advancing Brain Health with AI.</p>
+    </div>
+</footer>
+</body>
+</html>

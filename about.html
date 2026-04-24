@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+/* Hero Background Container */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+}
+
+/* Canvas Behind Content */
+#dashboardAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Keep Text Above the Canvas */
+.cta-section * {
+    position: relative;
+    z-index: 2;
+}
+/* ===== ABOUT PAGE – INFO SECTION ===== */
+
+.info-section {
+    width: 100%;
+    padding: 4rem 2rem;
+    background: var(--bg-primary);
+}
+
+.info-container {
+    max-width: 1300px;
+    margin: auto;
+    text-align: center;
+}
+
+.info-title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.info-subtitle {
+    max-width: 850px;
+    margin: 0 auto 3rem;
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 2rem;
+}
+
+.info-card {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: 0.3s ease;
+    text-align: left;
+}
+
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 28px rgba(39, 70, 255, 0.25);
+}
+
+.info-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.info-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+</style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+    <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+    <span class="logo-text">NeuroVytis</span>
+</div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                      <!-- LOGIN BUTTON -->
+            <a href="login.html" class="btn-login" style="
+                background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                color: white;
+                padding: 0.45rem 1.35rem;
+                border-radius: 2rem;
+                font-size: 0.95rem;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: 32px; 
+                margin-left: 10px;
+                line-height: 1;
+                text-decoration: none;
+                box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                Login
+            </a>
+            </ul>
+        </div>
+    </nav>
+    <section class="cta-section">
+    <canvas id="dashboardAnimation"></canvas>
+
+    <h2 class="cta-title">About Us
+    </h2>
+    <p class="cta-subtitle">
+     NeuroVytis combines neuroscience, AI, and data visualization to empower early Alzheimer’s detection and lifelong cognitive health.</p>
+</section>
+
+
+    <div class="container">
+        <h1 class="page-title">About NeuroVytis</h1>
+        
+        <div class="about-section">
+            <h2>Our Mission</h2>
+            <p>NeuroVytis is dedicated to revolutionizing Alzheimer's detection and brain health monitoring through advanced AI and machine learning technologies. We believe early detection and continuous monitoring can significantly improve outcomes for millions of people worldwide.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Our Vision</h2>
+            <p>We envision a world where AI-powered brain health analysis is accessible to everyone, enabling early intervention and personalized care strategies that preserve cognitive function and quality of life.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Research Background</h2>
+            <p>Our platform is built on decades of neuroscience research and validated clinical data. We partner with leading medical institutions and research centers to ensure our algorithms meet the highest standards of accuracy and reliability.</p>
+        </div> 
+        </div>
+        <!-- Alzheimer Awareness Section -->
+<section class="alz-section">
+    <div class="alz-container">
+
+        <h2 class="alz-title">Understanding Alzheimer’s Disease</h2>
+        <p class="alz-subtitle">
+            Alzheimer’s is a progressive neurological disorder that affects memory, thinking, and behavior. 
+            Early detection combined with lifestyle care can greatly slow cognitive decline.
+        </p>
+
+        <div class="alz-grid">
+            
+            <!-- Card 1 -->
+            <div class="alz-card">
+                <img src="./images/brainchange.png" alt="Healthy vs Alzheimer Brain" class="alz-img">
+                <h4>How the Brain Changes</h4>
+                <p>
+                    Alzheimer’s leads to shrinkage of key memory regions, buildup of amyloid plaques, 
+                    and loss of neural connectivity. Brain imaging helps detect these early signs.
+                </p>
+            </div>
+
+              <!-- Card 2 -->
+            <div class="alz-card">
+                <img src="./images/care.png" alt="Caregiver Support" class="alz-img">
+                <h4>Care & Support</h4>
+                <p>
+                    With medical guidance, cognitive training, emotional support, and lifestyle adjustments, 
+                    individuals can maintain independence and quality of life for longer.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="alz-card">
+                <img src="./images/early symptom.png" alt="Memory Decline Concept" class="alz-img">
+                <h4>Early Symptoms</h4>
+                <p>
+                    Subtle memory lapses, confusion, difficulty planning, and language challenges are common 
+                    early indicators. Identifying these signs early improves treatment outcomes.
+                </p>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+/* ============================
+   ALZHEIMER AWARENESS SECTION
+   ============================ */
+
+.alz-section {
+    width: 100%;
+    background:var(--primary-gradient);
+    padding: 4rem 2rem;
+    color: white;
+}
+
+.alz-container {
+    max-width: 1400px;
+    margin: auto;
+    text-align: center;
+}
+
+.alz-title {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    color: white;
+}
+
+.alz-subtitle {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    color: #e6f9ff;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.alz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 2rem;
+}
+
+.alz-card {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 1rem;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+    text-align: left;
+}
+
+.alz-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(255,255,255,0.25);
+}
+
+.alz-img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.alz-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.alz-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.alz-bottom-text {
+    max-width: 900px;
+    margin: 3rem auto 0;
+    font-size: 1.15rem;
+    color: #e6faff;
+    line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .alz-title {
+        font-size: 2rem;
+    }
+    .alz-subtitle {
+        font-size: 1rem;
+    }
+}
+</style>
+
+    </div>
+    <!-- INFO SECTION -->
+<section class="info-section">
+    <div class="info-container">
+
+        <h2 class="info-title">Why NeuroVytis Matters</h2>
+
+        <p class="info-subtitle">
+            With Alzheimer’s cases rising globally, early detection and visual understanding are more critical than ever. 
+            NeuroVytis bridges the gap between complex neuroscience and user-friendly insight.
+        </p>
+
+        <div class="info-grid">
+
+            <div class="info-card">
+                <h4>AI-Driven Insights</h4>
+                <p>Advanced machine learning models analyze cognitive patterns and highlight early changes invisible to traditional tests.</p>
+            </div>
+
+            <div class="info-card">
+                <h4>Real-Time Brain Visualization</h4>
+                <p>Interactive 3D models allow users to explore the brain dynamically and understand how Alzheimer’s alters key regions.</p>
+            </div>
+
+            <div class="info-card">
+                <h4>Empowering Families</h4>
+                <p>Clear reports, brain comparisons, and personalized recommendations help caregivers take informed action early.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <h2 class="cta-title">Need Help or Have Questions?</h2>
+    <p class="cta-subtitle">
+        Our team is here to support you—reach out anytime for guidance, feedback, or technical assistance.
+    </p>
+    <a href="contact.html" class="btn btn-primary">Contact Support</a>
+</section>
+
+                
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+  <!-- FOOTER --> 
+
+                 
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+  <!-- FOOTER --> 
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h3 class="footer-title">NeuroVytis</h3>
+            <p class="footer-desc">
+                AI-powered neurological insights, brain visualization, and predictive analytics 
+                to support early detection and cognitive health tracking.
+            </p>
+
+            <div class="footer-socials">
+                <a href="#" class="social-icon">🌐</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">📘</a>
+                <a href="#" class="social-icon">📸</a>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Platform</h4>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="brain-visualizer.html">3D Brain Model</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="ai-risk-predictor.html">AI Predictor</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Support</h4>
+            <ul>
+                <li><a href="help-center.html">Help Center</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Contact</h4>
+            <p>Email: support@neurovytis.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p>Location: Bengaluru, India</p>
+            <a href="contact.html" class="footer-btn">Get in Touch</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>🧠 2025 NeuroVytis — Advancing Brain Health with AI.</p>
+    </div>
+</footer><script>
+const canvas = document.getElementById("dashboardAnimation");
+const ctx = canvas.getContext("2d");
+
+// Resize canvas
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+// Network Nodes (reduced motion + softer appearance)
+let nodes = [];
+let totalNodes = 28; // fewer nodes
+
+for (let i = 0; i < totalNodes; i++) {
+    nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,   // slower movement
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.8 + 1.2,      // smaller nodes
+        opacity: 0.55                        // MUCH lighter opacity
+    });
+}
+
+function animateNetwork() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Softer, fewer connections
+    for (let i = 0; i < totalNodes; i++) {
+        for (let j = i + 1; j < totalNodes; j++) {
+            let dx = nodes[i].x - nodes[j].x;
+            let dy = nodes[i].y - nodes[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist < 120) { // smaller connection range
+                ctx.strokeStyle = "rgba(255,255,255,0.20)"; // softer lines
+                ctx.lineWidth = 0.9;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    // Draw softer nodes
+    nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${n.opacity})`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateNetwork);
+}
+
+animateNetwork();
+</script>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

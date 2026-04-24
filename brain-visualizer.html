@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Visualizer - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+/* Hero Background Container */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+}
+
+/* Canvas Behind Content */
+#dashboardAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Keep Text Above the Canvas */
+.cta-section * {
+    position: relative;
+    z-index: 2;
+}
+        .sketchfab-embed-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.sketchfab-embed-wrapper iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+    display: block;
+}
+
+.canvas-wrapper {
+    width: 100%;
+    height: 600px;   /* Adjust height of visualizer area */
+    position: relative;
+}
+
+.visualizer-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.visualizer-container .canvas-wrapper {
+    flex: 1;
+}
+
+    </style>
+</head>
+<body>
+     <!-- ⭐ NAVBAR ADDED HERE -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link active">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Login
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <!-- ⭐ END NAVBAR -->
+
+
+   
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="cta-section">
+    <canvas id="dashboardAnimation"></canvas>
+
+    <h2 class="cta-title">3D Brain Visualizer</h2>
+    <p class="cta-subtitle">
+        Explore high-resolution 3D brain models to understand structure, function, and Alzheimer’s-related changes through immersive visualization.
+    </p>
+</section>
+            <div class="container">
+                <div class="visualizer-container">
+                    <div class="canvas-wrapper">
+                        
+    <div class="sketchfab-embed-wrapper">
+        <h1 style="margin: 10px 20px 10px;color: #2c7cf4;">Brain Visualizer</h1>
+        <iframe 
+           title="Blue Brain"
+           frameborder="0"
+           allowfullscreen 
+           mozallowfullscreen="true" 
+           webkitallowfullscreen="true"
+           allow="autoplay; fullscreen; xr-spatial-tracking"
+           src="https://sketchfab.com/models/a7943aec0f0440b38c94c1533c0df217/embed">
+        </iframe>
+    </div>
+</div>
+  <!-- <canvas id="brainVisualizerCanvas"></canvas> -->
+                    </div>
+                    <!--  -->
+
+                <div class="brain-info">
+                    <h3>Brain Regions</h3>
+                    <div class="region-list">
+                        <div class="region-item">
+                            <span class="region-name">Hippocampus</span>
+                            <span class="region-status healthy">Normal</span>
+                        </div>
+                        <div class="region-item">
+                            <span class="region-name">Prefrontal Cortex</span>
+                            <span class="region-status healthy">Normal</span>
+                        </div>
+                        <div class="region-item">
+                            <span class="region-name">Temporal Lobe</span>
+                            <span class="region-status healthy">Normal</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- PROGRESSION TIMELINE SECTION -->
+<div class="timeline-card" style="
+    margin-top: 2rem;
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+">
+
+    <h3 style="
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem;">
+        Alzheimer’s Progression Timeline
+    </h3>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 14px; height: 14px; border-radius: 50%; background:#6cffb5;"></div>
+            <p style="color: var(--text-primary);">Early Stage: Mild memory loss & difficulty recalling names.</p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 14px; height: 14px; border-radius: 50%; background:#ffd86a;"></div>
+            <p style="color: var(--text-primary);">Middle Stage: Confusion, impaired judgment, and disorientation.</p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 14px; height: 14px; border-radius: 50%; background:#ff5b5b;"></div>
+            <p style="color: var(--text-primary);">Late Stage: Severe cognitive decline, communication breakdown.</p>
+        </div>
+
+    </div>
+
+</div>
+<!-- ============================================================
+     ⭐ ADDITIONAL STYLING FOR NEW SECTIONS (EMBEDDED CSS)
+=============================================================== -->
+<style>
+/* Title Style (matches your gradient headings) */
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+/* GRID for cards */
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Card Style (matches dashboard + analytics look) */
+.brain-info-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    transition: 0.3s ease;
+}
+.brain-info-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Metrics inside cards */
+.metric-group {
+    margin-top: 1rem;
+}
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .4rem;
+}
+.metric-label {
+    font-size: .9rem;
+    color: var(--text-secondary);
+}
+.metric-value {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* INSIGHTS SECTION */
+.insight-block {
+    display: flex;
+    gap: 1rem;
+    background: var(--bg-primary);
+    padding: 1.2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    align-items: flex-start;
+}
+.insight-icon {
+    font-size: 1.4rem;
+}
+
+/* COLORS */
+.success { color: var(--success); }
+.warning { color: var(--warning); }
+.danger { color: var(--danger); }
+
+/* COMPARISON GRID */
+.compare-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+.compare-box {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+</style>
+
+
+<!-- ============================================================
+     🔵 SECTION 1: Cognitive Function Overview
+=============================================================== -->
+<section class="container" style="margin-top: 2.5rem;">
+    <h2 class="section-title">Cognitive Function Overview</h2>
+
+    <div class="overview-grid">
+
+        <div class="brain-info-card">
+            <h3>Memory Processing</h3>
+            <p style="color: var(--text-secondary);">
+                Brain activity & retention levels measured through hippocampal analysis.
+            </p>
+
+            <div class="metric-group">
+                <div class="metric-row">
+                    <span class="metric-label">Recall</span>
+                    <span class="metric-value">82%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Recognition</span>
+                    <span class="metric-value">76%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Retention</span>
+                    <span class="metric-value">88%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="brain-info-card">
+            <h3>Attention & Focus</h3>
+            <p style="color: var(--text-secondary);">
+                Measures cognitive load & prefrontal cortex attentional stability.
+            </p>
+
+            <div class="metric-group">
+                <div class="metric-row">
+                    <span class="metric-label">Attention Span</span>
+                    <span class="metric-value">67%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Concentration</span>
+                    <span class="metric-value">71%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Cognitive Load</span>
+                    <span class="metric-value">53%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="brain-info-card">
+            <h3>Language & Comprehension</h3>
+            <p style="color: var(--text-secondary);">
+                Evaluates speech processing and interpretation efficiency.
+            </p>
+
+            <div class="metric-group">
+                <div class="metric-row">
+                    <span class="metric-label">Speech Clarity</span>
+                    <span class="metric-value">91%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Word Recall</span>
+                    <span class="metric-value">64%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Understanding</span>
+                    <span class="metric-value">83%</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- ============================================================
+     🔵 SECTION 2: Brain Health Insights
+=============================================================== -->
+<section class="container" style="margin-top: 3rem;">
+    <h2 class="section-title">Brain Health Insights</h2>
+
+    <div class="overview-grid">
+
+        <div class="insight-block" style="border-left: 4px solid var(--success);">
+            <div class="insight-icon success">✓</div>
+            <div>
+                <h4 class="success">Strong Hippocampal Integrity</h4>
+                <p style="color: var(--text-secondary);">
+                    Memory encoding & retention appear stable.
+                </p>
+            </div>
+        </div>
+
+        <div class="insight-block" style="border-left: 4px solid var(--warning);">
+            <div class="insight-icon warning">!</div>
+            <div>
+                <h4 class="warning">Mild Temporal Lobe Slowdown</h4>
+                <p style="color: var(--text-secondary);">
+                    Slightly reduced auditory processing speed detected.
+                </p>
+            </div>
+        </div>
+
+        <div class="insight-block" style="border-left: 4px solid var(--danger);">
+            <div class="insight-icon danger">⚠</div>
+            <div>
+                <h4 class="danger">Cognitive Fatigue Detected</h4>
+                <p style="color: var(--text-secondary);">
+                    Elevated mental load indicates reduced focus capacity.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- ============================================================
+     🔵 SECTION 3: Comparative Brain Metrics
+=============================================================== -->
+<section class="container" style="margin-top: 3rem; margin-bottom: 0;">
+    <h2 class="section-title">Comparative Brain Metrics</h2>
+
+    <div class="compare-metrics">
+
+        <div class="compare-box">
+            <h4 style="color: var(--text-primary); margin-bottom: .5rem;">Neuron Density</h4>
+            <p style="color: var(--text-secondary);">Healthy Brain: 98%</p>
+            <p style="color: var(--text-secondary);">Alzheimer’s: 72%</p>
+        </div>
+
+        <div class="compare-box">
+            <h4 style="color: var(--text-primary); margin-bottom: .5rem;">Synaptic Activity</h4>
+            <p style="color: var(--text-secondary);">Healthy Brain: High</p>
+            <p style="color: var(--text-secondary);">Alzheimer’s: Reduced</p>
+        </div>
+
+        <div class="compare-box">
+            <h4 style="color: var(--text-primary); margin-bottom: .5rem;">Cortical Thickness</h4>
+            <p style="color: var(--text-secondary);">Healthy Brain: 4.5 mm</p>
+            <p style="color: var(--text-secondary);">Alzheimer’s: 2.8 mm</p>
+        </div>
+
+        <div class="compare-box">
+            <h4 style="color: var(--text-primary); margin-bottom: .5rem;">Glucose Metabolism</h4>
+            <p style="color: var(--text-secondary);">Healthy Brain: Normal</p>
+            <p style="color: var(--text-secondary);">Alzheimer’s: Low</p>
+        </div>
+
+    </div>
+</section>
+
+            </div>
+        </main>
+    </div>
+
+               
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+  <!-- FOOTER --> 
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h3 class="footer-title">NeuroVytis</h3>
+            <p class="footer-desc">
+                AI-powered neurological insights, brain visualization, and predictive analytics 
+                to support early detection and cognitive health tracking.
+            </p>
+
+            <div class="footer-socials">
+                <a href="#" class="social-icon">🌐</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">📘</a>
+                <a href="#" class="social-icon">📸</a>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Platform</h4>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="brain-visualizer.html">3D Brain Model</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="ai-risk-predictor.html">AI Predictor</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Support</h4>
+            <ul>
+                <li><a href="help-center.html">Help Center</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Contact</h4>
+            <p>Email: support@neurovytis.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p>Location: Bengaluru, India</p>
+            <a href="contact.html" class="footer-btn">Get in Touch</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>🧠 2025 NeuroVytis — Advancing Brain Health with AI.</p>
+    </div>
+</footer><script>
+const canvas = document.getElementById("dashboardAnimation");
+const ctx = canvas.getContext("2d");
+
+// Resize canvas
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+// Network Nodes (reduced motion + softer appearance)
+let nodes = [];
+let totalNodes = 28; // fewer nodes
+
+for (let i = 0; i < totalNodes; i++) {
+    nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,   // slower movement
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.8 + 1.2,      // smaller nodes
+        opacity: 0.55                        // MUCH lighter opacity
+    });
+}
+
+function animateNetwork() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Softer, fewer connections
+    for (let i = 0; i < totalNodes; i++) {
+        for (let j = i + 1; j < totalNodes; j++) {
+            let dx = nodes[i].x - nodes[j].x;
+            let dy = nodes[i].y - nodes[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist < 120) { // smaller connection range
+                ctx.strokeStyle = "rgba(255,255,255,0.20)"; // softer lines
+                ctx.lineWidth = 0.9;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    // Draw softer nodes
+    nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${n.opacity})`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateNetwork);
+}
+
+animateNetwork();
+</script>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

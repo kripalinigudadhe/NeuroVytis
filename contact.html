@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+/* Hero Background Container */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+}
+
+/* Canvas Behind Content */
+#dashboardAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Keep Text Above the Canvas */
+.cta-section * {
+    position: relative;
+    z-index: 2;
+}
+/* === FAQ SECTION === */
+.faq-section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 4rem 2rem;
+}
+
+.faq-item {
+    background: var(--bg-secondary);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.2rem;
+    transition: 0.3s;
+}
+
+.faq-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.faq-item h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+}
+
+.faq-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+</style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+    <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+    <span class="logo-text">NeuroVytis</span>
+</div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                      <!-- LOGIN BUTTON -->
+            <a href="login.html" class="btn-login" style="
+                background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                color: white;
+                padding: 0.45rem 1.35rem;
+                border-radius: 2rem;
+                font-size: 0.95rem;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: 32px; 
+                margin-left: 10px;
+                line-height: 1;
+                text-decoration: none;
+                box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                Login
+            </a>
+            </ul>
+        </div>
+    </nav>
+    <section class="cta-section">
+    <canvas id="dashboardAnimation"></canvas>
+
+    <h2 class="cta-title">Get in Touch With Us</h2>
+    <p class="cta-subtitle">
+       Have questions, feedback, or need support? Our team is here to help you 24/7. </p>
+</section>
+
+
+    <div class="container">
+        <h1 class="page-title">Contact Us</h1>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <strong>📧 Email</strong>
+                        <p>support@neurovytis.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>📞 Phone</strong>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>🏢 Address</strong>
+                        <p>123 Medical Boulevard, Health City, HC 12345</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+  
+<!-- FAQ SECTION -->
+<section class="faq-section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <h3>How accurate is the NeuroVytis AI Predictor?</h3>
+        <p>The platform uses clinically validated biomarkers and offers high-accuracy predictions based on EEG/MRI data.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Who can benefit from these resources?</h3>
+        <p>Students, caregivers, researchers, clinicians, and anyone interested in cognitive health.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Are the downloadable materials free?</h3>
+        <p>Yes, all guides and PDFs available are completely free for users.</p>
+    </div>
+</section>
+                 
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+  <!-- FOOTER --> 
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h3 class="footer-title">NeuroVytis</h3>
+            <p class="footer-desc">
+                AI-powered neurological insights, brain visualization, and predictive analytics 
+                to support early detection and cognitive health tracking.
+            </p>
+
+            <div class="footer-socials">
+                <a href="#" class="social-icon">🌐</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">📘</a>
+                <a href="#" class="social-icon">📸</a>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Platform</h4>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="brain-visualizer.html">3D Brain Model</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="ai-risk-predictor.html">AI Predictor</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Support</h4>
+            <ul>
+                <li><a href="help-center.html">Help Center</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Contact</h4>
+            <p>Email: support@neurovytis.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p>Location: Bengaluru, India</p>
+            <a href="contact.html" class="footer-btn">Get in Touch</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>🧠 2025 NeuroVytis — Advancing Brain Health with AI.</p>
+    </div>
+</footer><script>
+const canvas = document.getElementById("dashboardAnimation");
+const ctx = canvas.getContext("2d");
+
+// Resize canvas
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+// Network Nodes (reduced motion + softer appearance)
+let nodes = [];
+let totalNodes = 28; // fewer nodes
+
+for (let i = 0; i < totalNodes; i++) {
+    nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,   // slower movement
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.8 + 1.2,      // smaller nodes
+        opacity: 0.55                        // MUCH lighter opacity
+    });
+}
+
+function animateNetwork() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Softer, fewer connections
+    for (let i = 0; i < totalNodes; i++) {
+        for (let j = i + 1; j < totalNodes; j++) {
+            let dx = nodes[i].x - nodes[j].x;
+            let dy = nodes[i].y - nodes[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist < 120) { // smaller connection range
+                ctx.strokeStyle = "rgba(255,255,255,0.20)"; // softer lines
+                ctx.lineWidth = 0.9;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    // Draw softer nodes
+    nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${n.opacity})`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animateNetwork);
+}
+
+animateNetwork();
+</script>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

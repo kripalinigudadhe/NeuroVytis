@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Alerts - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+       /* ============================================================
+   ENHANCED REMINDER FORM (Matches Full Theme)
+   ============================================================ */
+
+.reminder-section {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    margin-top: 2.5rem;
+    transition: background 0.3s, border 0.3s;
+}
+
+.reminder-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.reminder-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+}
+
+.reminder-form textarea {
+    grid-column: span 2;
+}
+
+.reminder-form input,
+.reminder-form textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border 0.3s, background 0.3s;
+}
+
+.reminder-form input:focus,
+.reminder-form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--glass);
+    outline: none;
+}
+
+.btn-add-reminder {
+    grid-column: span 2;
+    padding: 0.85rem 1.2rem;
+    border-radius: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border: none;
+    background: var(--primary-gradient);
+    box-shadow: 0 4px 12px rgba(39, 70, 255, 0.25);
+    transition: all 0.3s;
+}
+
+.btn-add-reminder:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(39, 70, 255, 0.35);
+}
+
+/* Reminder List */
+.reminder-list {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Reminder Cards */
+.reminder-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--primary);
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s;
+}
+
+.reminder-card:hover {
+    transform: translateY(-4px);
+}
+
+.reminder-info p {
+    margin: 4px 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.reminder-info strong {
+    color: var(--text-primary);
+}
+
+.delete-btn {
+    background: var(--success);
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    background: #10640d;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .reminder-form {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-add-reminder {
+        grid-column: span 1;
+    }
+}
+/* ============================================================
+   ALERTS SECTION (Matches Full Theme)
+   ============================================================ */
+
+.alert-section {
+    margin-top: 2.5rem;
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.alert-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Alert List */
+.alert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* Alert Card Base */
+.alert-card {
+    padding: 1.3rem 1.4rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.alert-card h3 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.alert-card p {
+    margin-top: 6px;
+    color: var(--text-secondary);
+}
+
+/* Hover */
+.alert-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(39, 70, 255, 0.25);
+}
+
+/* Colored Variants */
+.alert-info {
+    border-left: 5px solid #f26db8d5;
+}
+
+.alert-warning {
+    border-left: 5px solid #FFC107;
+}
+
+.alert-danger {
+    border-left: 5px solid #FF3A3A;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .alert-card {
+        padding: 1.1rem;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="predictive-alerts.html" class="nav-link active">Alerts</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1 style="color: white;">Features</h1>
+            <nav class="sidebar-nav">
+                <a href="profile.html" class="sidebar-link">👤 Profile</a>
+                <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle</a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link active">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Predictive Alerts & Reminders</h1>
+            </div>
+
+            <!-- EXISTING ALERTS -->
+            <div class="container">
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div style="padding: 1.5rem; background: rgba(167, 189, 240, 0.355); border-left: 4px solid var(--primary); border-radius: 0.5rem;">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">✓ All Systems Normal</h4>
+                        <p style="color: var(--text-secondary);">Your cognitive metrics are stable.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---------------------- REMINDER FORM SECTION ---------------------- -->
+            <div class="reminder-section container">
+                <h2>Set Your Custom Reminders</h2>
+
+                <form id="reminderForm" class="reminder-form">
+                    <input type="date" id="reminderDate" required>
+                    <input type="time" id="reminderTime" required>
+                    <textarea id="reminderAction" placeholder="Action to be performed..." required></textarea>
+                    <button type="submit" class="btn-add-reminder">Add Reminder</button>
+                </form>
+
+                <h3 style="color: white; margin-top: 1rem;">Your Reminders</h3>
+                <div id="reminderList" class="reminder-list"></div>
+            </div>
+
+            <!-- 🔥 NEW ALERTS SECTION -->
+<div class="alert-section container">
+    <h2>Active System Alerts</h2>
+
+    <div class="alert-list">
+
+        <div class="alert-card alert-info">
+            <h3>🧠 Memory Stability Good</h3>
+            <p>Your recent cognitive test scores show stable memory retention.</p>
+        </div>
+
+        <div class="alert-card alert-warning">
+            <h3>⚠️ Increased Stress Detected</h3>
+            <p>High stress levels detected from your weekly mood pattern.</p>
+        </div>
+
+        <div class="alert-card alert-danger">
+            <h3>🚨 High Decline Risk (AI Prediction)</h3>
+            <p>Your AI model indicates a temporary rise in risk. Please review recommendations.</p>
+        </div>
+
+    </div>
+</div>
+
+        </main>
+    </div>
+
+    <!-- ---------------------- JAVASCRIPT ---------------------- -->
+<script>
+    const reminderForm = document.getElementById("reminderForm");
+    const reminderList = document.getElementById("reminderList");
+
+    // Load reminders on start
+    loadReminders();
+
+    /* ------------------------------------
+       Save + Display Reminders
+    ------------------------------------ */
+    function loadReminders() {
+        reminderList.innerHTML = "";
+        const reminders = JSON.parse(localStorage.getItem("reminders")) || [];
+
+        reminders.forEach((rem, index) => {
+            const div = document.createElement("div");
+            div.classList.add("reminder-card");
+
+            div.innerHTML = `
+                <div class="reminder-info">
+                    <p><strong>Date:</strong> ${rem.date}</p>
+                    <p><strong>Time:</strong> ${rem.time}</p>
+                    <p><strong>Action:</strong> ${rem.action}</p>
+                </div>
+                <button class="delete-btn" onclick="deleteReminder(${index})">Delete</button>
+            `;
+
+            reminderList.appendChild(div);
+        });
+    }
+
+    /* ------------------------------------
+       Add New Reminder
+    ------------------------------------ */
+    reminderForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const date = document.getElementById("reminderDate").value;
+        const time = document.getElementById("reminderTime").value;
+        const action = document.getElementById("reminderAction").value;
+
+        if (!date || !time || !action) {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        const newReminder = {
+            date,
+            time,
+            action,
+            triggered: false
+        };
+
+        const reminders = JSON.parse(localStorage.getItem("reminders")) || [];
+        reminders.push(newReminder);
+        localStorage.setItem("reminders", JSON.stringify(reminders));
+
+        reminderForm.reset();
+        loadReminders();
+    });
+
+    /* ------------------------------------
+       Delete Reminder
+    ------------------------------------ */
+    function deleteReminder(index) {
+        const reminders = JSON.parse(localStorage.getItem("reminders")) || [];
+        reminders.splice(index, 1);
+        localStorage.setItem("reminders", JSON.stringify(reminders));
+        loadReminders();
+    }
+
+    /* ------------------------------------
+       Real-Time Reminder Checking
+       Runs every 30 seconds
+    ------------------------------------ */
+    setInterval(checkReminders, 30000);
+
+    function checkReminders() {
+        const now = new Date();
+        const currentDate = now.toISOString().split("T")[0];
+        const currentTime = now.toTimeString().slice(0, 5);
+
+        let reminders = JSON.parse(localStorage.getItem("reminders")) || [];
+
+        reminders.forEach((rem, index) => {
+            if (rem.date === currentDate &&
+                rem.time === currentTime &&
+                !rem.triggered) {
+
+                // Mark reminder as triggered
+                rem.triggered = true;
+                localStorage.setItem("reminders", JSON.stringify(reminders));
+
+                // Trigger alert popup
+                showReminderAlert(rem.action);
+
+                // Optional mobile vibration
+                if (navigator.vibrate) {
+                    navigator.vibrate([300, 200, 300]);
+                }
+            }
+        });
+    }
+
+    /* ------------------------------------
+       Beautiful Custom Reminder Popup
+    ------------------------------------ */
+    function showReminderAlert(action) {
+        const popup = document.createElement("div");
+        popup.style.position = "fixed";
+        popup.style.top = "20px";
+        popup.style.right = "20px";
+        popup.style.padding = "1rem 1.5rem";
+        popup.style.background = "var(--primary-gradient)";
+        popup.style.color = "white";
+        popup.style.borderRadius = "0.75rem";
+        popup.style.boxShadow = "0 8px 20px rgba(39, 70, 255, 0.45)";
+        popup.style.fontSize = "1.1rem";
+        popup.style.zIndex = "9999";
+        popup.style.animation = "slideIn 0.5s ease";
+
+        popup.innerHTML = `
+            🔔 <strong>Reminder</strong><br>${action}
+        `;
+
+        document.body.appendChild(popup);
+
+        setTimeout(() => {
+            popup.style.opacity = "0";
+            popup.style.transform = "translateX(50px)";
+            setTimeout(() => popup.remove(), 500);
+        }, 5000);
+    }
+</script>
+<script src="scripts.js"></script>
+
+</body>
+</html>

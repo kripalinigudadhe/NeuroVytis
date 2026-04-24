@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prevention Tips - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ⭐ NAVBAR ADDED HERE -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                 <li><a href="prevention-tips.html" class="nav-link active">Prevention</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+              
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <!-- ⭐ END NAVBAR -->
+
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+         <aside class="sidebar">
+            <h1 style="color: white;">Features</h1>
+            <nav class="sidebar-nav">
+ <a href="profile.html" class="sidebar-link ">👤 Profile</a>
+        <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle </a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link active">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Alzheimer's Prevention Tips</h1>
+                <div class="top-bar-actions">
+                     <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <a href="profile.html" class="btn btn-small">Profile</a>
+                </div>
+            </div>
+
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">🏃 Stay Physically Active</h3>
+                        <ul style="list-style-position: inside; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Exercise 150 minutes per week</li>
+                            <li>Include aerobic and strength training</li>
+                            <li>Walking is an excellent starting point</li>
+                            <li>Improves blood flow to the brain</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3 style="color: var(--accent); margin-bottom: 1rem;">🥗 Eat a Healthy Diet</h3>
+                        <ul style="list-style-position: inside; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Follow Mediterranean diet principles</li>
+                            <li>Eat fish rich in omega-3 fatty acids</li>
+                            <li>Include berries and leafy greens</li>
+                            <li>Limit processed foods and sugar</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3 style="color: var(--success); margin-bottom: 1rem;">😴 Prioritize Sleep</h3>
+                        <ul style="list-style-position: inside; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Aim for 7-9 hours nightly</li>
+                            <li>Maintain consistent sleep schedule</li>
+                            <li>Create a dark, cool bedroom</li>
+                            <li>Avoid screens before bedtime</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3 style="color: var(--warning); margin-bottom: 1rem;">🧠 Keep Your Mind Active</h3>
+                        <ul style="list-style-position: inside; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Learn new skills and languages</li>
+                            <li>Solve puzzles and play games</li>
+                            <li>Read regularly</li>
+                            <li>Engage in creative activities</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3 style="color: var(--danger); margin-bottom: 1rem;">👥 Stay Socially Connected</h3>
+                        <ul style="list-style-position: inside; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Maintain regular social interactions</li>
+                            <li>Join clubs or community groups</li>
+                            <li>Spend time with family and friends</li>
+                            <li>Volunteer in your community</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">🧘 Manage Stress</h3>
+                        <ul style="list-style-position: inside; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Practice meditation or yoga</li>
+                            <li>Manage work-life balance</li>
+                            <li>Practice deep breathing exercises</li>
+                            <li>Seek professional help if needed</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3 style="color: var(--accent); margin-bottom: 1rem;">🏥 Regular Health Check-ups</h3>
+                        <ul style="list-style-position: inside; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Monitor blood pressure and cholesterol</li>
+                            <li>Manage diabetes if present</li>
+                            <li>Regular cognitive assessments</li>
+                            <li>Discuss family history with doctor</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3 style="color: var(--success); margin-bottom: 1rem;">🚫 Avoid Risk Factors</h3>
+                        <ul style="list-style-position: inside; color: var(--text-secondary); line-height: 1.8;">
+                            <li>Don't smoke</li>
+                            <li>Limit alcohol consumption</li>
+                            <li>Avoid head injuries</li>
+                            <li>Protect hearing health</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

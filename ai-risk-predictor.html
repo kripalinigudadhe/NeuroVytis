@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Risk Predictor - NeuroVytis</title>
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* Page Specific Styling */
+.predictor-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    background: var(--glass);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.btn {
+    padding: 0.7rem 1.2rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #00C2FF, #2E4BFF);
+    color: white;
+}
+
+.result-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 0.7rem;
+    background: var(--glass);
+    border: 1px solid var(--border-color);
+}
+</style>
+</head>
+
+<body>
+
+<!-- ⭐ NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+            <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+            <li><a href="ai-risk-predictor.html" class="nav-link active">Risk Predictor</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+
+            <a href="login.html" class="btn-login" style="
+                background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                color: white;
+                padding: 0.45rem 1.35rem;
+                border-radius: 2rem;
+                font-size: 0.95rem;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: 32px;
+                margin-left: 10px;
+                text-decoration: none;
+                box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);
+            ">Logout</a>
+        </ul>
+    </div>
+</nav>
+
+<!-- ⭐ MAIN LAYOUT -->
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h1 style="color: white;">Features</h1>
+        <nav class="sidebar-nav">
+            <a href="profile.html" class="sidebar-link">👤 Profile</a>
+            <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+            <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+            <a href="ai-risk-predictor.html" class="sidebar-link active">🤖 Risk Predictor</a>
+            <a href="eeg-mri-upload.html" class="sidebar-link ">📤 Upload Data</a>
+            <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+            <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                    <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+            <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+            <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle</a>
+            <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+            <a href="report.html" class="sidebar-link">📋 Reports</a>
+            <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+            <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+            <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+            <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+            <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+            <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+            <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+            <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+        </nav>
+    </aside>
+
+    <!-- ⭐ MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="top-bar">
+            <h1 class="page-title">🧠 Alzheimer Risk Predictor</h1>
+            <div class="top-bar-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <a href="profile.html" class="btn btn-small">Profile</a>
+            </div>
+        </div>
+
+<div class="predictor-container">
+
+<div class="card">
+<h2>Patient Input</h2>
+<form id="riskForm"></form>
+
+<button class="btn btn-primary" onclick="predictRisk()">Predict Risk</button>
+
+<div id="result" class="result-box"></div>
+</div>
+
+</div>
+
+</main>
+</div>
+
+<script>
+const features = [
+  "Age","Gender","Education","FamilyHistory","Smoking",
+  "Alcohol","PhysicalActivity","BMI","BloodPressure",
+  "Diabetes","Cholesterol","Depression",
+  "SleepHours","CognitiveScore","MemoryScore"
+];
+
+const form = document.getElementById("riskForm");
+
+features.forEach(f => {
+  form.innerHTML += `
+    <label>${f}</label>
+    <input class="input" type="text" id="${f}" placeholder="Enter ${f}">
+  `;
+});
+
+async function predictRisk() {
+
+  let data = {};
+
+  for (let f of features) {
+    let val = document.getElementById(f).value;
+
+    if (val === "") {
+      alert("Fill all fields");
+      return;
+    }
+
+    data[f] = val;
+  }
+
+  const res = await fetch("http://localhost:5000/predict-risk", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const result = await res.json();
+
+  if (!result.success) {
+    document.getElementById("result").innerHTML = "❌ " + result.message;
+    return;
+  }
+
+  document.getElementById("result").innerHTML = `
+    <h3>🔥 Risk: ${result.prediction}</h3>
+    <p>📊 Probability: ${result.risk}%</p>
+  `;
+}
+</script>
+
+</body>
+</html>

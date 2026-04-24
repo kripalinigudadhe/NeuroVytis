@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recommendations - NeuroVytis</title>
+<link rel="stylesheet" href="styles.css">
+
+<style>/* ==========================================
+   RECOMMENDATION PAGE LAYOUT FIX
+   ========================================== */
+
+/* Main content padding consistency */
+.main-content {
+    padding-bottom: 3rem;
+}
+
+/* Recommendation Form Wrapper */
+.recommendation-form {
+    max-width: 1100px;
+    margin: 2.5rem auto; /* LEFT & RIGHT spacing */
+    padding: 2.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow);
+}
+form-section-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .form-group-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.6rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--glass);
+            outline: none;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .btn-generate {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(39, 70, 255, 0.3);
+        }
+
+/* ==========================================
+   AI GENERATED RECOMMENDATIONS
+   ========================================== */
+
+.dynamic-recommendations {
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    padding: 0 0.5rem;
+}
+
+/* Recommendation Cards */
+.rec-card {
+    margin-bottom: 1.8rem; /* spacing between cards */
+    padding: 1.75rem 2rem;
+    border-radius: 1.25rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Card hover effect */
+.rec-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(39, 70, 255, 0.18);
+}
+
+/* Card heading spacing */
+.rec-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.9rem;
+}
+
+/* List spacing */
+.rec-card ul {
+    padding-left: 1.3rem;
+}
+
+.rec-card ul li {
+    margin-bottom: 0.6rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Spinner spacing */
+.spinner {
+    margin-top: 2rem;
+}
+
+/* ==========================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .recommendation-form,
+    .dynamic-recommendations {
+        margin-left: 1.2rem;
+        margin-right: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .recommendation-form {
+        padding: 1.8rem;
+    }
+
+    .form-group-2col {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .recommendation-form {
+        padding: 1.4rem;
+    }
+
+    .rec-card {
+        padding: 1.4rem;
+    }
+}
+
+</style>
+</head>
+
+<body>
+<!-- ⭐ NAVBAR ADDED HERE -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                 <li><a href="recommendations.html" class="nav-link active">Recommendation</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+              
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                   Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <!-- ⭐ END NAVBAR -->
+
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+         <aside class="sidebar">
+            <h1 style="color: white;">Features</h1>
+            <nav class="sidebar-nav">
+ <a href="profile.html" class="sidebar-link ">👤 Profile</a>
+        <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle </a>
+                <a href="recommendations.html" class="sidebar-link active">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Personalized Recommendations</h1>
+                <div class="top-bar-actions">
+                     <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <a href="profile.html" class="btn btn-small">Profile</a>
+                </div>
+            </div>
+<div class="recommendation-form">
+
+                    <h2 class="form-section-title">📝 Enter Your Personal & Lifestyle Details</h2>
+
+                    <div class="form-group-2col">
+                        <div>
+                            <label class="form-label">Full Name</label>
+                            <input type="text" id="fullName" class="form-input">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Age</label>
+                            <input type="number" id="age" class="form-input">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Gender</label>
+                            <select id="gender" class="form-input">
+                                <option value="">Select</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="form-label">Occupation</label>
+                            <input type="text" id="occupation" class="form-input">
+                        </div>
+                    </div>
+
+                    <h3 class="form-section-title">💪 Lifestyle Habits</h3>
+                    <div class="form-group-2col">
+                        <div>
+                            <label class="form-label">Physical Activity Level</label>
+                            <select id="activityLevel" class="form-input">
+                                <option>Sedentary</option>
+                                <option>Light Activity</option>
+                                <option>Moderate</option>
+                                <option>Highly Active</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="form-label">Hours of Sleep per Night</label>
+                            <input type="number" id="sleepHours" class="form-input">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Diet Type</label>
+                            <select id="dietType" class="form-input">
+                                <option>Balanced Diet</option>
+                                <option>High Sugar</option>
+                                <option>High Fat</option>
+                                <option>Vegetarian</option>
+                                <option>Non-Vegetarian</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="form-label">Daily Water Intake (liters)</label>
+                            <input type="number" id="waterIntake" class="form-input">
+                        </div>
+                    </div>
+
+                    <h3 class="form-section-title">🧠 Cognitive & Social Health</h3>
+                    <div class="form-group-2col">
+                        <div>
+                            <label class="form-label">Cognitive Activity Frequency</label>
+                            <select id="cognitiveActivity" class="form-input">
+                                <option>Rarely</option>
+                                <option>Sometimes</option>
+                                <option>Weekly</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Social Interaction Level</label>
+                            <select id="socialLevel" class="form-input">
+                                <option>Low</option>
+                                <option>Moderate</option>
+                                <option>High</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h3 class="form-section-title">⚕️ Medical & Mental Health</h3>
+                    <div class="form-group-2col">
+                        <div>
+                            <label class="form-label">Chronic Conditions</label>
+                            <input type="text" id="conditions" class="form-input" placeholder="Diabetes, BP, etc.">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Stress Level</label>
+                            <select id="stressLevel" class="form-input">
+                                <option>Low</option>
+                                <option>Medium</option>
+                                <option>High</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn-generate" onclick="generateRecommendations()">
+                        🔍 Generate Personalized Recommendations
+                    </button>
+                </div>
+
+                <!-- ===========================
+                    AI GENERATED RESULTS
+                ============================ -->
+                <div id="aiOutput" class="dynamic-recommendations" style="display:none;">
+                    <h3>🔮 Your AI-Generated Recommendations</h3>
+                    <div id="recommendationContent"></div>
+                    <div class="spinner" id="loadingSpinner" style="display:none;">⏳ Generating insights...</div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+<script>
+async function generateRecommendations() {
+
+document.getElementById("aiOutput").style.display = "block";
+document.getElementById("loadingSpinner").style.display = "block";
+document.getElementById("recommendationContent").innerHTML = "";
+
+const userData = {
+    name: fullName.value,
+    age: age.value,
+    gender: gender.value,
+    occupation: occupation.value,
+    activity: activityLevel.value,
+    sleep: sleepHours.value,
+    diet: dietType.value,
+    water: waterIntake.value,
+    cognitive: cognitiveActivity.value,
+    social: socialLevel.value,
+    conditions: conditions.value,
+    stress: stressLevel.value
+};
+
+const res = await fetch("http://localhost:5000/generate-recommendations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userData)
+});
+
+const data = await res.json();
+document.getElementById("loadingSpinner").style.display = "none";
+
+if (!data.success) {
+    recommendationContent.innerHTML = "⚠️ Failed to generate recommendations.";
+    return;
+}
+
+// ---- FORMAT AI TEXT INTO SECTIONS ----
+const sections = data.recommendations.split("\n\n");
+let html = "";
+
+sections.forEach(sec => {
+    const lines = sec.split("\n");
+    const title = lines[0];
+    const points = lines.slice(1).filter(l => l.trim() !== "");
+
+    html += `<div class="rec-card">
+        <h4>${title}</h4>
+        <ul>${points.map(p => `<li>${p.replace(/^[-•]/,'')}</li>`).join("")}</ul>
+    </div>`;
+});
+
+recommendationContent.innerHTML = html;
+}
+</script>
+
+</body>
+</html>

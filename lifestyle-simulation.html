@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifestyle Simulation - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>/* ============================================================
+   BRAIN HEALTH IMPACT – GLOWING IMAGE (Hero-style Animation)
+   ============================================================ */
+
+.brain-image-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+/* Glowing, floating brain image */
+.brain-glow-image {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: 0.5rem;
+    /* Border & glass frame */
+    background: var(--glass);
+
+    /* Glow + depth */
+    filter: drop-shadow(0 0 25px var(--primary-400)) brightness(1.45);
+
+    /* Animations */
+    animation: brainFloat 6s ease-in-out infinite,
+               brainGlowPulse 3s ease-in-out infinite alternate;
+
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover effect (extra glow & zoom) */
+.brain-glow-image:hover {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 40px var(--primary)) brightness(1.4);
+}
+
+/* Floating animation */
+@keyframes brainFloat {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-16px); }
+    100% { transform: translateY(0); }
+}
+
+/* Glow pulsing animation */
+@keyframes brainGlowPulse {
+    0% {
+        filter: drop-shadow(0 0 22px var(--primary-400)) brightness(1.2);
+    }
+    100% {
+        filter: drop-shadow(0 0 36px var(--accent)) brightness(1.33);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- ⭐ NAVBAR ADDED HERE -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                 <li><a href="lifestyle-simulation.html" class="nav-link active">Lifestyle</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+              
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                 Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <!-- ⭐ END NAVBAR -->
+
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+         <aside class="sidebar">
+            <h1 style="color: white;">Features</h1>
+            <nav class="sidebar-nav">
+ <a href="profile.html" class="sidebar-link ">👤 Profile</a>
+        <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                                <a href="lifestyle-simulation.html" class="sidebar-link active">🏃 Lifestyle </a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Lifestyle Impact Simulator</h1>
+                <div class="top-bar-actions">
+                     <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <a href="profile.html" class="btn btn-small">Profile</a>
+                </div>
+            </div>
+
+            <div class="container">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3>Adjust Lifestyle Factors</h3>
+                        <form id="lifestyleForm" style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem;">
+                            <div class="form-group">
+                                <label>Sleep (hours/night): <span id="sleepValue">7</span></label>
+                                <input type="range" min="4" max="10" value="7" id="sleepSlider">
+                            </div>
+                            <div class="form-group">
+                                <label>Exercise (hours/week): <span id="exerciseValue">5</span></label>
+                                <input type="range" min="0" max="20" value="5" id="exerciseSlider">
+                            </div>
+                            <div class="form-group">
+                                <label>Stress Level (1-10): <span id="stressValue">5</span></label>
+                                <input type="range" min="1" max="10" value="5" id="stressSlider">
+                            </div>
+                            <div class="form-group">
+                                <label>Social Activity (hours/week): <span id="socialValue">5</span></label>
+                                <input type="range" min="0" max="20" value="5" id="socialSlider">
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="calculateImpact()">Calculate Impact</button>
+                        </form>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+                        <h3>Brain Health Impact</h3>
+                        <!-- <div class="impact-card"> -->
+
+    <div id="impactResult" style="margin-top: 1rem; display: none;">
+        <div style="text-align: center; padding: 1.5rem;">
+               <!-- BRAIN IMAGE SECTION -->
+           <div class="brain-image-wrapper">
+    <img 
+        class="brain-glow-image"
+        src="./images/brainglow.png"
+        alt="Brain Glow"
+    >
+</div>
+            <!-- HEALTH SCORE -->
+            <div id="healthScore"
+                style="font-size: 2.5rem; font-weight: 700; background: var(--primary-gradient);
+                -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+                background-clip: text; margin-bottom: 1rem;">
+            </div>
+
+         
+            <!-- DESCRIPTION -->
+            <div id="impactDescription" style="color: var(--text-secondary); line-height: 1.6;"></div>
+                        <div id="impactResult" style="margin-top: 1rem; display: none;">
+                            <div style="text-align: center; padding: 1.5rem;">
+                                <div style="font-size: 2.5rem; font-weight: 700; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;" id="healthScore">0%</div>
+                                <div style="color: var(--text-secondary); line-height: 1.6;" id="impactDescription"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('sleepSlider').addEventListener('input', (e) => {
+            document.getElementById('sleepValue').textContent = e.target.value;
+        });
+        document.getElementById('exerciseSlider').addEventListener('input', (e) => {
+            document.getElementById('exerciseValue').textContent = e.target.value;
+        });
+        document.getElementById('stressSlider').addEventListener('input', (e) => {
+            document.getElementById('stressValue').textContent = e.target.value;
+        });
+        document.getElementById('socialSlider').addEventListener('input', (e) => {
+            document.getElementById('socialValue').textContent = e.target.value;
+        });
+
+        window.calculateImpact = function() {
+            const sleep = parseInt(document.getElementById('sleepSlider').value);
+            const exercise = parseInt(document.getElementById('exerciseSlider').value);
+            const stress = parseInt(document.getElementById('stressSlider').value);
+            const social = parseInt(document.getElementById('socialSlider').value);
+
+            let score = 50;
+            score += (sleep - 7) * 3;
+            score += exercise * 2;
+            score -= stress * 2;
+            score += social * 1.5;
+            score = Math.max(10, Math.min(95, score));
+
+            const healthScore = document.getElementById('healthScore');
+            const impactDescription = document.getElementById('impactDescription');
+            const impactResult = document.getElementById('impactResult');
+
+            healthScore.textContent = Math.round(score) + '%';
+
+            if (score >= 75) {
+                impactDescription.textContent = 'Excellent lifestyle choices! Your brain health is optimized.';
+            } else if (score >= 50) {
+                impactDescription.textContent = 'Good lifestyle balance. Consider increasing exercise or reducing stress.';
+            } else {
+                impactDescription.textContent = 'Your lifestyle needs adjustment. Focus on sleep and exercise.';
+            }
+
+            impactResult.style.display = 'block';
+        };
+    </script>
+</body>
+</html>

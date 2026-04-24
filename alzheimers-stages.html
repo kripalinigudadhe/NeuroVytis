@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alzheimer Stage Predictor — NeuroVytis</title>
+
+  <!-- Link to your existing global theme file (you uploaded this) -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Page-specific embedded styles (keeps consistent with your theme variables) -->
+  <style>
+    /* Page container */
+    .predictor-page {
+      padding: 2.5rem;
+      min-height: calc(100vh - 80px);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    .predictor-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 2rem;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Left column: cards & interactions */
+    .panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.6rem;
+      box-shadow: 0 8px 24px rgba(39,70,255,0.04);
+    }
+
+    .panel h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .panel p.lead {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Symptom card grid */
+    .symptom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px,1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .symptom-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.45));
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.9rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      user-select: none;
+      color: var(--text-primary);
+      box-shadow: 0 6px 18px rgba(39,70,255,0.04);
+    }
+
+    .symptom-card .emoji {
+      font-size: 1.45rem;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(39,70,255,0.06);
+      border: 1px solid rgba(39,70,255,0.05);
+    }
+
+    .symptom-card .text {
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.15;
+    }
+
+    .symptom-card .sub {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .symptom-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(39,70,255,0.07);
+    }
+
+    .symptom-card.selected {
+      background: linear-gradient(90deg, rgba(122,31,255,0.10), rgba(39,70,255,0.06));
+      border-color: var(--primary);
+      box-shadow: 0 18px 40px rgba(39,70,255,0.10);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    /* Control row */
+    .controls {
+      display:flex;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .controls .btn {
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+    }
+
+    .controls .small-note {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Chart-ish progress summary */
+    .summary-row {
+      display:flex;
+      gap:1rem;
+      margin-top:1.5rem;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .score-pill {
+      background: linear-gradient(90deg, rgba(39,70,255,0.06), rgba(122,31,255,0.06));
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      min-width: 120px;
+      text-align:center;
+    }
+
+    .score-pill .num {
+      font-size:1.4rem;
+      font-weight:800;
+      background: var(--primary-gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      display:inline-block;
+    }
+
+    .score-pill .label {
+      display:block;
+      color:var(--text-secondary);
+      font-size:0.9rem;
+    }
+
+    /* Right column: result card */
+    .result-card {
+      position: sticky;
+      top: 1.25rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,250,255,0.95));
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(39,70,255,0.05);
+    }
+
+    .stage-badge {
+      display:inline-flex;
+      gap:0.5rem;
+      align-items:center;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      font-weight:700;
+      font-size:0.95rem;
+      background: var(--primary-gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      border: 1px solid rgba(39,70,255,0.08);
+    }
+
+    .result-visual {
+      margin-top:1rem;
+      padding:1rem;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(39,70,255,0.04), rgba(122,31,255,0.03));
+      display:flex;
+      gap:1rem;
+      align-items:center;
+    }
+
+    .risk-bar {
+      flex: 1;
+      height: 16px;
+      background: var(--border-color);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .risk-level {
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, #16aedd, #4157e5, #760cee);
+      transition: width 0.7s cubic-bezier(.2,.9,.2,1);
+    }
+
+    .result-meta {
+      margin-top: 1rem;
+      display:grid;
+      gap: 0.65rem;
+    }
+
+    .meta-row {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0.6rem;
+      border-radius:8px;
+      background:var(--bg-primary);
+      border:1px solid var(--border-color);
+    }
+
+    .meta-row strong {
+      color: var(--text-primary);
+    }
+
+    .interventions {
+      margin-top: 0.9rem;
+      display:flex;
+      gap:0.5rem;
+      flex-direction:column;
+    }
+
+    .intervention {
+      padding: 0.7rem;
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,255,0.95));
+      border:1px solid var(--border-color);
+      font-size:0.95rem;
+      color:var(--text-primary);
+    }
+
+    /* subtle fade-in animation for result */
+    .result-card.hidden {
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+    }
+
+    .result-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    /* helpful small footer note */
+    .note {
+      margin-top: 1rem;
+      color:var(--text-secondary);
+      font-size:0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .predictor-grid {
+        grid-template-columns: 1fr;
+      }
+      .result-card {
+        position: relative;
+        top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ⭐ NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="alzheimers-stages.html" class="nav-link active">Alzheimer Stages</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+
+  <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1 style="color:white;">Features</h1>
+            <nav class="sidebar-nav">
+                <a href="profile.html" class="sidebar-link">👤 Profile</a>
+                <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle</a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link active">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+  
+ <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Alzheimer Stage Predictor</h1>
+                <div class="top-bar-actions">
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <a href="profile.html" class="btn btn-small">Profile</a>
+                </div>
+            </div>
+            <main class="predictor-page">
+    <div class="predictor-grid">
+      <!-- LEFT: interactions -->
+      <section class="panel" aria-labelledby="pickSymptoms">
+        <h2 id="pickSymptoms">Choose symptoms (click cards)</h2>
+        <p class="lead">Select the symptoms the person is experiencing. The predictor uses a weighted scoring system (symptom severity × frequency) to estimate the likely Alzheimer's stage, risk level, expected duration, and care recommendations.</p>
+
+        <!-- symptom cards -->
+        <div class="symptom-grid" id="symptomGrid" role="group" aria-label="Symptoms">
+          <!-- Each card has data-score weight and data-frequency (user toggles frequency) -->
+          <div class="symptom-card" data-score="1" tabindex="0">
+            <div class="emoji">🧠</div>
+            <div>
+              <div class="text">Mild Memory Loss</div>
+              <span class="sub">Forgets recent events sometimes</span>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-score="1" tabindex="0">
+            <div class="emoji">💬</div>
+            <div>
+              <div class="text">Finding Words Slowly</div>
+              <span class="sub">Occasional difficulty naming things</span>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-score="2" tabindex="0">
+            <div class="emoji">📍</div>
+            <div>
+              <div class="text">Gets Lost</div>
+              <span class="sub">Confused in familiar places</span>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-score="2" tabindex="0">
+            <div class="emoji">🧭</div>
+            <div>
+              <div class="text">Trouble with Decisions</div>
+              <span class="sub">Difficulty managing finances/complex tasks</span>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-score="3" tabindex="0">
+            <div class="emoji">😕</div>
+            <div>
+              <div class="text">Confusion & Disorientation</div>
+              <span class="sub">Mixing up time, day, or place</span>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-score="3" tabindex="0">
+            <div class="emoji">👪</div>
+            <div>
+              <div class="text">Difficulty Recognizing People</div>
+              <span class="sub">Fails to recognize close relatives</span>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-score="4" tabindex="0">
+            <div class="emoji">🛏️</div>
+            <div>
+              <div class="text">Severe Sleep Disturbance</div>
+              <span class="sub">Night waking, reversed sleep</span>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-score="5" tabindex="0">
+            <div class="emoji">🧍‍♀️</div>
+            <div>
+              <div class="text">Needs Full-Time Support</div>
+              <span class="sub">Requires assistance with daily care</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- controls (predict, reset) -->
+        <div class="controls" aria-hidden="false">
+          <button class="btn btn-primary" id="predictBtn">Predict Stage</button>
+          <button class="btn btn-control" id="resetBtn">Reset</button>
+          <div class="small-note">Tip: Click multiple cards to refine the prediction.</div>
+        </div>
+
+        <!-- quick summary -->
+        <div class="summary-row" aria-live="polite">
+          <div class="score-pill">
+            <span class="num" id="scoreNum">0</span>
+            <span class="label">Symptom Score</span>
+          </div>
+
+          <div style="flex:1">
+            <div style="font-weight:700; color:var(--text-primary)">Quick Interpretation</div>
+            <div id="quickInterpret" style="color:var(--text-secondary)">No symptoms selected yet.</div>
+          </div>
+        </div>
+
+        <p class="note">Important: This is an educational tool to suggest possible staging. It does not replace clinical diagnosis. For medical decisions, consult a clinician and biomarker tests (MRI, PET, CSF, cognitive assessments).</p>
+      </section>
+
+      <!-- RIGHT: result -->
+      <aside class="result-card hidden" id="resultCard" aria-live="polite">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div class="stage-badge" id="stageBadge">—</div>
+            <div style="font-size:0.95rem; color:var(--text-secondary); margin-top:0.45rem" id="stageShort">Awaiting selection</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:0.85rem; color:var(--text-secondary)">Est. confidence</div>
+            <div style="font-weight:800; font-size:1.2rem" id="confidencePct">—</div>
+          </div>
+        </div>
+
+        <div class="result-visual" aria-hidden="false">
+          <div style="min-width: 84px; text-align:center;">
+            <div style="font-size:1.4rem; font-weight:800" id="stageEmoji">🔎</div>
+            <div style="color:var(--text-secondary); font-size:0.85rem; margin-top:0.35rem" id="stageLabelSmall">—</div>
+          </div>
+
+          <div style="flex:1">
+            <div style="display:flex; gap:0.75rem; align-items:center;">
+              <div style="font-weight:700; color:var(--text-primary)">Risk</div>
+              <div style="color:var(--text-secondary); font-size:0.9rem">Estimated probability of progression</div>
+            </div>
+
+            <div style="margin-top:0.6rem;">
+              <div class="risk-bar" aria-hidden="true">
+                <div class="risk-level" id="riskLevel"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-top:0.45rem; font-size:0.9rem; color:var(--text-secondary)">
+                <div id="riskTextLeft">Low</div>
+                <div id="riskTextRight">High</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- metadata -->
+        <div class="result-meta">
+          <div class="meta-row">
+            <span>Predicted Stage</span>
+            <strong id="predictedStage">—</strong>
+          </div>
+
+          <div class="meta-row">
+            <span>Care Required</span>
+            <strong id="careRequired">—</strong>
+          </div>
+
+          <div class="meta-row">
+            <span>Typical Duration</span>
+            <strong id="durationText">—</strong>
+          </div>
+        </div>
+
+        <div style="margin-top:0.75rem; font-weight:700; color:var(--text-primary)">Suggested Interventions</div>
+        <div class="interventions" id="interventionList">
+          <!-- populated by JS -->
+        </div>
+
+        <p class="note" style="margin-top:0.9rem;">If you see signs of moderate or severe decline, consider scheduling a comprehensive cognitive assessment and imaging (MRI/PET) within 2–4 weeks.</p>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Page JS: dynamic predictor logic -->
+  <script>
+    (function(){
+      // symptom card behavior
+      const cards = Array.from(document.querySelectorAll('.symptom-card'));
+      const scoreNum = document.getElementById('scoreNum');
+      const quickInterpret = document.getElementById('quickInterpret');
+      const predictBtn = document.getElementById('predictBtn');
+      const resetBtn = document.getElementById('resetBtn');
+
+      const resultCard = document.getElementById('resultCard');
+      const stageBadge = document.getElementById('stageBadge');
+      const stageShort = document.getElementById('stageShort');
+      const predictedStage = document.getElementById('predictedStage');
+      const careRequired = document.getElementById('careRequired');
+      const durationText = document.getElementById('durationText');
+      const interventionList = document.getElementById('interventionList');
+      const riskLevel = document.getElementById('riskLevel');
+      const confidencePct = document.getElementById('confidencePct');
+      const stageEmoji = document.getElementById('stageEmoji');
+      const stageLabelSmall = document.getElementById('stageLabelSmall');
+
+      // toggle selection on click/keyboard
+      cards.forEach(card => {
+        card.addEventListener('click', () => toggleCard(card));
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard(card);
+          }
+        });
+      });
+
+      function toggleCard(card) {
+        card.classList.toggle('selected');
+        updateScorePreview();
+      }
+
+      function updateScorePreview() {
+        const selected = cards.filter(c => c.classList.contains('selected'));
+        const total = selected.reduce((s, c) => s + Number(c.dataset.score || 0), 0);
+        scoreNum.textContent = total;
+        if (total === 0) {
+          quickInterpret.textContent = 'No symptoms selected yet.';
+        } else if (total <= 2) {
+          quickInterpret.textContent = 'Likely Preclinical or very mild signs.';
+        } else if (total <= 5) {
+          quickInterpret.textContent = 'Suggests Mild Cognitive Impairment (MCI).';
+        } else if (total <= 9) {
+          quickInterpret.textContent = 'Suggests Moderate Alzheimer\'s signs.';
+        } else {
+          quickInterpret.textContent = 'Suggests Severe Alzheimer\'s — urgent clinical review advised.';
+        }
+      }
+
+      // mapping for stage results (weights => stage)
+      function computeStage(totalScore) {
+        // basic rule-based mapping; you can replace with server-side ML later
+        if (totalScore <= 2) {
+          return {
+            code: 'preclinical',
+            stage: 'Preclinical Alzheimer\'s',
+            short: 'Early biological changes, no/very mild symptoms',
+            emoji: '🌱',
+            care: 'Monitoring & lifestyle',
+            duration: '0–2 years (variable)',
+            riskPct: Math.min(15 + totalScore * 6, 30),
+            confidence: 75,
+            interventions: [
+              'Monitor cognitive changes quarterly',
+              'Encourage exercise, Mediterranean diet, social engagement',
+              'Schedule biomarker tests if family history exists'
+            ]
+          };
+        } else if (totalScore <= 5) {
+          return {
+            code: 'mci',
+            stage: 'Mild Cognitive Impairment (MCI)',
+            short: 'Noticeable memory issues; independent with minor help',
+            emoji: '🟡',
+            care: 'Support with reminders & cognitive exercises',
+            duration: '2–7 years (typical)',
+            riskPct: Math.min(30 + (totalScore-2) * 10, 60),
+            confidence: 78,
+            interventions: [
+              'Cognitive training & structured routines',
+              'Medication review & manage vascular risks (BP, cholesterol)',
+              'Refer for neuropsychological assessment'
+            ]
+          };
+        } else if (totalScore <= 9) {
+          return {
+            code: 'moderate',
+            stage: 'Moderate Alzheimer\'s',
+            short: 'Significant memory loss, difficulty with daily tasks',
+            emoji: '🟠',
+            care: 'Needs regular assistance; consider day-care support',
+            duration: '2–10 years (longest stage)',
+            riskPct: Math.min(60 + (totalScore-5) * 6, 90),
+            confidence: 82,
+            interventions: [
+              'Structured caregiver support & supervised routines',
+              'Consider cholinesterase inhibitors if appropriate',
+              'Safety assessment at home (Wandering risk)'
+            ]
+          };
+        } else {
+          return {
+            code: 'severe',
+            stage: 'Severe Alzheimer\'s',
+            short: 'Loss of abilities; requires full-time care',
+            emoji: '🔴',
+            care: 'Full-time professional care',
+            duration: '1–3 years (advanced support phase)',
+            riskPct: Math.min(85 + (totalScore-9) * 3, 99),
+            confidence: 88,
+            interventions: [
+              'Full-time caregiving or residential care',
+              'Palliative care planning & clear advanced directives',
+              'Manage nutrition, mobility and frequent medical reviews'
+            ]
+          };
+        }
+      }
+
+      function animateRiskBar(pct) {
+        // set width as pct%
+        riskLevel.style.width = pct + '%';
+      }
+
+      function showResult(model) {
+        // populate UI
+        stageBadge.textContent = model.stage;
+        stageShort.textContent = model.short;
+        predictedStage.textContent = model.stage;
+        careRequired.textContent = model.care;
+        durationText.textContent = model.duration;
+        confidencePct.textContent = model.confidence + '%';
+        stageEmoji.textContent = model.emoji;
+        stageLabelSmall.textContent = model.code.toUpperCase();
+
+        interventionList.innerHTML = '';
+        model.interventions.forEach(i => {
+          const d = document.createElement('div');
+          d.className = 'intervention';
+          d.textContent = '• ' + i;
+          interventionList.appendChild(d);
+        });
+
+        // risk percent and animation
+        const pct = Math.round(model.riskPct);
+        animateRiskBar(pct);
+
+        // show card with fade
+        resultCard.classList.remove('hidden');
+        resultCard.classList.add('visible');
+      }
+
+      // predict click
+      predictBtn.addEventListener('click', () => {
+        const total = cards.filter(c => c.classList.contains('selected'))
+                          .reduce((s, c) => s + Number(c.dataset.score || 0), 0);
+
+        // if nothing selected, nudge user
+        if (total === 0) {
+          // small highlight animation on symptom grid
+          const grid = document.getElementById('symptomGrid');
+          grid.style.transition = 'transform 0.12s';
+          grid.style.transform = 'translateY(-6px)';
+          setTimeout(() => grid.style.transform = '', 140);
+          quickInterpret.textContent = 'Please select at least one symptom to predict.';
+          return;
+        }
+
+        // compute model and display
+        const model = computeStage(total);
+        showResult(model);
+      });
+
+      // reset
+      resetBtn.addEventListener('click', () => {
+        cards.forEach(c=>c.classList.remove('selected'));
+        scoreNum.textContent = '0';
+        quickInterpret.textContent = 'No symptoms selected yet.';
+        resultCard.classList.remove('visible');
+        resultCard.classList.add('hidden');
+        animateRiskBar(0);
+        interventionList.innerHTML = '';
+        stageBadge.textContent = '—';
+        predictedStage.textContent = '—';
+        careRequired.textContent = '—';
+        durationText.textContent = '—';
+        confidencePct.textContent = '—';
+        stageEmoji.textContent = '🔎';
+        stageLabelSmall.textContent = '—';
+      });
+
+      // small startup
+      updateScorePreview();
+    })();
+  </script>
+</body>
+</html>

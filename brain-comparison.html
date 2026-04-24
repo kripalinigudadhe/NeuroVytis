@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Comparison - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+
+<style>
+
+/* =============== 3D MODEL CARD STYLES =============== */
+.brain-card {
+    width: 100%;
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.brain-card-title {
+    margin-bottom: 1rem;
+    color: #fff;
+    text-align: center;
+}
+
+/* Make Sketchfab model fill container */
+.sketchfab-embed-wrapper {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.sketchfab-embed-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+}
+
+/* PAGE-SPECIFIC ------------------------------------------------ */
+.btn-login {
+    padding: 0.45rem 1.35rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: 0 3px 10px rgba(39,70,255,0.3);
+    text-decoration: none;
+}
+
+.brain-compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.brain-card-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+/* KEY DIFFERENCE SECTION ------------------------------- */
+.key-diff-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.key-diff-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.key-diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.diff-box {
+    padding: 1rem;
+    border-radius: 0.7rem;
+}
+
+.diff-box ul {
+    margin-top: 0.75rem;
+    list-style-position: inside;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.healthy-box {
+    background: rgba(0, 179, 122, 0.1);
+    border-left: 4px solid var(--success);
+}
+
+.alz-box {
+    background: rgba(255, 71, 87, 0.1);
+    border-left: 4px solid var(--danger);
+}
+
+/* ANALYTICAL INSIGHTS FIXED ---------------------------- */
+.analysis-section {
+    margin-top: 2rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.analysis-box {
+    padding: 1.6rem;
+    border-radius: 1rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+}
+
+.analysis-box h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.analysis-box p {
+    color: var(--text-secondary);
+    line-height: 1.65;
+    font-size: 0.95rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ⭐ NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+
+        <div class="nav-logo">
+            <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+            <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+            <li><a href="brain-comparison.html" class="nav-link active">Brain Comparison</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+
+            <a href="login.html" class="btn-login"
+                style="background: var(--primary-gradient); color:white;">
+               Logout
+            </a>
+        </ul>
+    </div>
+</nav>
+
+<!-- PAGE LAYOUT -->
+<div class="app-layout">
+
+<!-- ⭐ SIDEBAR -->
+<aside class="sidebar">
+    <h1 style="color:white;">Features</h1>
+
+    <nav class="sidebar-nav">
+        <a href="profile.html" class="sidebar-link">👤 Profile</a>
+        <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+        <a href="brain-comparison.html" class="sidebar-link active">⚖️ Brain Comparison</a>
+        <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+        <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+        <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+        <a href="quiz.html" class="sidebar-link">❓ Cognitive Quiz</a>
+        <a href="results.html" class="sidebar-link">📈 Quiz Results</a>
+        <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+        <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                        <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle </a>
+        <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+        <a href="report.html" class="sidebar-link">📋 Reports</a>
+        <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+        <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+        <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+        <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+        <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+        <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+        <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+        <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+    </nav>
+</aside>
+
+<!-- ⭐ MAIN CONTENT -->
+<main class="main-content">
+
+    <div class="top-bar">
+        <h1 class="page-title">Brain Comparison Analysis</h1>
+        <div class="top-bar-actions">
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+            <a href="profile.html" class="btn btn-small">Profile</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- TWO BRAIN IMAGES -->
+        <div class="brain-compare-grid">
+
+            <!-- Healthy Brain -->
+            <div class="brain-card">
+                <h3 style="color:#1a67ec; font-size:25px;">Healthy Brain</h3>
+                <li style="list-style:none; margin-top:1rem;">
+                    <img src="/images/Normal Brain.jpeg" 
+                         alt="Healthy Brain Structure"
+                         style="width:100%; border-radius:.6rem;">
+                </li>
+            </div>
+
+            <!-- Alzheimer Brain -->
+            <div class="brain-card">
+                <h3 style="color:#1a67ec; font-size:25px;">Alzheimer’s Brain</h3>
+                <li style="list-style:none; margin-top:1rem;">
+                    <img src="/images/Alzheimer Brainn.png" 
+                         alt="Alzheimer Brain Atrophy"
+                         style="width:100%; border-radius:.6rem;">
+                </li>
+            </div>
+
+        </div>
+
+<!-- KEY DIFFERENCES -->
+<div class="key-diff-card">
+
+    <h3 class="key-diff-title">Key Differences</h3>
+
+    <div class="key-diff-grid">
+
+        <div class="diff-box healthy-box">
+            <strong>Healthy Brain</strong>
+            <ul>
+                <li>Normal hippocampal volume</li>
+                <li>Strong neural synaptic connections</li>
+                <li>Normal amyloid-beta levels</li>
+                <li>Preserved cognitive & memory function</li>
+                <li>Stable reasoning, learning & attention</li>
+                <li>No neurofibrillary tau tangles</li>
+                <li>Balanced neurotransmitter levels</li>
+                <li>Stable cortical thickness & brain mass</li>
+                <li>Efficient neural communication</li>
+            </ul>
+        </div>
+
+        <div class="diff-box alz-box">
+            <strong>Alzheimer’s Brain</strong>
+            <ul>
+                <li>Significant hippocampal shrinkage</li>
+                <li>Weakened or lost synaptic connections</li>
+                <li>High amyloid plaque accumulation</li>
+                <li>Severe memory & cognitive decline</li>
+                <li>Tau protein tangles disrupt neurons</li>
+                <li>Thinned cortical tissue (atrophy)</li>
+                <li>Reduced neurotransmitter activity</li>
+                <li>Slowed information processing</li>
+                <li>Lower brain metabolism (glucose use)</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- ANALYTICAL SECTION (FIXED) -->
+<div class="analysis-section">
+
+    <h3 style="
+        font-size:1.5rem;
+        background:var(--primary-gradient);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        font-weight:800;
+        margin-bottom:1.5rem;">
+        Analytical Insights
+    </h3>
+
+    <div class="analysis-grid">
+
+        <div class="analysis-box">
+            <h4>Memory Decline Rate</h4>
+            <p>Alzheimer’s patients show 40–60% faster decline in hippocampal memory formation ability.</p>
+        </div>
+
+        <div class="analysis-box">
+            <h4>Neural Connectivity Loss</h4>
+            <p>Up to 30% of synaptic connections deteriorate, slowing reasoning, learning and responsiveness.</p>
+        </div>
+
+        <div class="analysis-box">
+            <h4>Amyloid Plaques</h4>
+            <p>Beta-amyloid protein buildup blocks neuron communication and triggers inflammatory damage.</p>
+        </div>
+
+        <div class="analysis-box">
+            <h4>Tau Tangles</h4>
+            <p>Tau proteins twist into toxic tangles, collapsing internal neuron transport systems.</p>
+        </div>
+
+        <div class="analysis-box">
+            <h4>Cortical Atrophy</h4>
+            <p>Alzheimer’s brains lose 10–20% cortical mass in decision-making and memory regions.</p>
+        </div>
+
+        <div class="analysis-box">
+            <h4>Neurotransmitter Imbalance</h4>
+            <p>Reduced acetylcholine and dopamine disrupt attention, focus and overall cognition.</p>
+        </div>
+
+    </div>
+
+</div>
+
+    </div>
+</main>
+
+</div> <!-- app-layout -->
+
+<script src="script.js"></script>
+</body>
+</html>

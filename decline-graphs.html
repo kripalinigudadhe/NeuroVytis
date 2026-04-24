@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decline Tracking - NeuroVytis</title>
+
+    <!-- MAIN GLOBAL STYLES -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- 🔹 EXTRA PAGE-SPECIFIC CSS (LIGHT THEME ENHANCEMENTS ONLY) -->
+    <style>
+        /* Page wrapper spacing */
+        .decline-container {
+            padding: 2.5rem;
+        }
+
+        /* Card styling override for analytics feel */
+        .decline-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 1.2rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .decline-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Stats row */
+        .decline-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-tile {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: transform 0.25s ease;
+        }
+
+        .stat-tile:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .stat-value.success {
+            color: var(--success);
+        }
+
+        .stat-value.primary {
+            color: var(--primary);
+        }
+
+        .stat-value.warning {
+            color: var(--warning);
+        }
+
+        /* Chart canvas fix */
+        canvas {
+            max-height: 340px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ========== NAVBAR (FROM styles.css) ========== -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="images/logo.png" class="nav-logo-img" alt="Logo">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+            <li><a href="decline-graphs.html" class="nav-link active">Decline Graphs</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+          
+  <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                   Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+
+<!-- ========== APP LAYOUT ========== -->
+<div class="app-layout">
+
+   <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h1 style="color: white;">Features</h1>
+        <nav class="sidebar-nav">
+            <a href="profile.html" class="sidebar-link">👤 Profile</a>
+            <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+            <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+            <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+            <a href="eeg-mri-upload.html" class="sidebar-link ">📤 Upload Data</a>
+            <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+            <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                    <a href="decline-graphs.html" class="sidebar-link active">📊 Decline Tracking</a>
+            <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+            <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle</a>
+            <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+            <a href="report.html" class="sidebar-link">📋 Reports</a>
+            <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+            <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+            <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+            <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+            <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+            <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+            <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+            <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="top-bar">
+            <h1 class="page-title">Cognitive Decline Tracking</h1>
+            <div class="top-bar-actions">
+               <button class="theme-toggle" id="themeToggle">🌙</button>
+            <a href="profile.html" class="btn btn-small">Profile</a>
+            </div>
+        </div>
+
+        <div class="decline-container">
+
+            <!-- GRAPH -->
+            <div class="decline-card">
+                <h3>12-Month Cognitive Performance Trend</h3>
+                <canvas id="declineChart"></canvas>
+            </div>
+
+            <!-- STATS -->
+            <div class="decline-stats">
+    <div class="stat-tile">
+        <div class="stat-label">Current Cognitive Status</div>
+        <div class="stat-value success" id="cognitiveStatus">Loading...</div>
+    </div>
+
+    <div class="stat-tile">
+        <div class="stat-label">Annual Change</div>
+        <div class="stat-value primary" id="annualChange">Loading...</div>
+    </div>
+
+    <div class="stat-tile">
+        <div class="stat-label">Risk Level</div>
+        <div class="stat-value warning" id="riskLevel">Loading...</div>
+    </div>
+</div>
+        </div>
+    </main>
+</div>
+
+<!-- ========== EMBEDDED JS (DECLINE GRAPH) ========== -->
+<script>
+async function loadGraph() {
+
+    const res = await fetch("http://localhost:5000/daily-updates", {
+        credentials: "include"
+    });
+
+    const data = await res.json();
+
+    if (!data.length) {
+        alert("No daily updates found!");
+        return;
+    }
+
+    // 🔥 VALUE → SCORE MAPPING
+    const scoreMap = {
+        "None": 100,
+        "Mild": 75,
+        "Moderate": 50,
+        "Severe": 25,
+
+        "Fully Oriented": 100,
+        "Partially Disoriented": 60,
+        "Disoriented": 30,
+
+        "Normal": 100,
+        "Reduced": 60,
+        "Poor": 30,
+
+        "Clear": 100,
+        "Slurred": 60,
+        "Incoherent": 30,
+
+        "Stable": 100,
+        "Anxious": 70,
+        "Depressed": 50,
+        "Aggressive": 30,
+
+        "Low": 100,
+        "Medium": 60,
+        "High": 30,
+
+        "Yes": 30,
+        "No": 100,
+
+        "Good": 100,
+        "Average": 70,
+        "Poor": 40,
+
+        "Adequate": 100,
+        "Low": 50,
+
+        "Independent": 100,
+        "Needs Assistance": 60,
+        "Dependent": 30,
+
+        "Assisted": 60,
+        "Immobile": 20
+    };
+
+    const labels = [];
+    const memory = [];
+    const attention = [];
+    const mood = [];
+    const functional = [];
+
+    data.forEach(d => {
+
+        labels.push(formatDate(d.date));
+
+        memory.push(scoreMap[d.memory_issues] || 50);
+        attention.push(scoreMap[d.attention_span] || 50);
+        mood.push(scoreMap[d.mood] || 50);
+
+        const funcScore = (
+            (scoreMap[d.mobility] || 50) +
+            (scoreMap[d.daily_independence] || 50)
+        ) / 2;
+
+        functional.push(funcScore);
+    });
+
+    renderChart(labels, memory, attention, mood, functional);
+    updateStats(memory, attention, mood, functional);
+}
+
+// 🎯 RENDER GRAPH
+function renderChart(labels, memory, attention, mood, functional) {
+
+    const ctx = document.getElementById("declineChart");
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "🧠 Memory",
+                    data: memory,
+                    borderColor: "#2746FF",
+                    backgroundColor: "rgba(39,70,255,0.1)",
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: "🎯 Attention",
+                    data: attention,
+                    borderColor: "#00C2FF",
+                    backgroundColor: "rgba(0,194,255,0.1)",
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: "😊 Mood",
+                    data: mood,
+                    borderColor: "#FF9F43",
+                    backgroundColor: "rgba(255,159,67,0.1)",
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: "🏃 Functional",
+                    data: functional,
+                    borderColor: "#00B37A",
+                    backgroundColor: "rgba(0,179,122,0.1)",
+                    fill: true,
+                    tension: 0.4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: "index",
+                intersect: false
+            },
+            plugins: {
+                tooltip: {
+                    backgroundColor: "#111",
+                    titleColor: "#fff",
+                    bodyColor: "#ddd"
+                },
+                legend: {
+                    labels: {
+                        color: "#aaa"
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: "#888" }
+                },
+                y: {
+                    min: 0,
+                    max: 100,
+                    ticks: { color: "#888" }
+                }
+            }
+        }
+    });
+}
+function updateStats(memory, attention, mood, functional) {
+
+    // 👉 Combine overall score
+    const overall = memory.map((_, i) => {
+        return (memory[i] + attention[i] + mood[i] + functional[i]) / 4;
+    });
+
+    const latest = overall[overall.length - 1];
+    const first = overall[0];
+
+    // =============================
+    // 🧠 CURRENT STATUS
+    // =============================
+    let status = "Stable";
+    let statusClass = "success";
+
+    if (latest < 50) {
+        status = "Critical";
+        statusClass = "warning";
+    } else if (latest < 70) {
+        status = "Declining";
+        statusClass = "warning";
+    }
+
+    const statusEl = document.getElementById("cognitiveStatus");
+    statusEl.innerText = status;
+    statusEl.className = "stat-value " + statusClass;
+
+    // =============================
+    // 📈 ANNUAL CHANGE
+    // =============================
+    const change = ((latest - first) / first) * 100;
+    const changeText = change.toFixed(1) + "%";
+
+    const changeEl = document.getElementById("annualChange");
+    changeEl.innerText = (change >= 0 ? "+" : "") + changeText;
+
+    changeEl.className = "stat-value " + (change >= 0 ? "success" : "warning");
+
+    // =============================
+    // ⚠️ RISK LEVEL
+    // =============================
+    const avg = overall.reduce((a, b) => a + b, 0) / overall.length;
+
+    let risk = "Low Risk";
+    let riskClass = "success";
+
+    if (avg < 50) {
+        risk = "High Risk";
+        riskClass = "warning";
+    } else if (avg < 70) {
+        risk = "Moderate Risk";
+        riskClass = "primary";
+    }
+
+    const riskEl = document.getElementById("riskLevel");
+    riskEl.innerText = risk;
+    riskEl.className = "stat-value " + riskClass;
+}
+// 📅 FORMAT DATE
+function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short"
+    });
+}
+
+// 🚀 LOAD GRAPH
+loadGraph();
+</script>
+
+</body>
+</html>

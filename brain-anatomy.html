@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Anatomy - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ⭐ NAVBAR ADDED HERE -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="brain-anatomy.html" class="nav-link active">Brain Anatomy</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+               
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <!-- ⭐ END NAVBAR -->
+
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1 style="color: white;">Features</h1>
+            <nav class="sidebar-nav">
+ <a href="profile.html" class="sidebar-link ">👤 Profile</a>
+        <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle </a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link active">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Brain Anatomy Guide</h1>
+                <div class="top-bar-actions">
+                     <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <a href="profile.html" class="btn btn-small">Profile</a>
+                </div>
+            </div>
+
+           <div class="container">
+
+    <!-- ⭐ BRAIN ANATOMY IMAGE SECTION -->
+    <section style="
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        padding: 2rem;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        text-align: center;">
+        
+        <h2 style="
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;">
+            Brain Anatomy Overview
+        </h2>
+
+        <img src="./images/Brain Anatomy.jpeg" 
+             alt="Brain Anatomy Diagram"
+             style="width:100%; max-width:900px; border-radius:1rem; margin-top:1rem;">
+    </section>
+
+    <!-- ⭐ GRID OF BRAIN PARTS FROM IMAGE -->
+    <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;">
+
+        <!-- Cerebrum -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Cerebrum</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                The largest region of the brain responsible for higher cognitive functions, including memory,
+                reasoning, sensory interpretation, and voluntary movement control.
+            </p>
+        </div>
+
+        <!-- Limbic System -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+            <h3 style="color: var(--accent); margin-bottom: 1rem;">Limbic System</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                A network of structures that regulate emotions, motivation, and memory formation.
+                Commonly impacted in early Alzheimer’s due to its role in emotional memory.
+            </p>
+        </div>
+
+        <!-- Thalamus / Hypothalamus Complex -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+            <h3 style="color: var(--success); margin-bottom: 1rem;">Thalamus / Hypothalamus Complex</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                Acts as a relay center for sensory information and regulates vital functions such as
+                hormones, temperature, hunger, and circadian rhythm.
+            </p>
+        </div>
+
+        <!-- Cerebellum -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+            <h3 style="color: var(--warning); margin-bottom: 1rem;">Cerebellum</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                Responsible for smooth coordination of movements, posture, and balance.
+                Contains dense neural networks crucial for motor accuracy.
+            </p>
+        </div>
+
+        <!-- Brainstem -->
+        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem; border-radius: 1rem;">
+            <h3 style="color: var(--danger); margin-bottom: 1rem;">Brainstem</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                Controls vital life functions such as breathing, heart rate, and digestion.
+                Acts as the main communication pathway between the brain and body.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ⭐ ADDITIONAL INFORMATIVE SECTION -->
+    <section style="
+        margin-top: 2.5rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: var(--shadow);">
+
+        <h2 style="
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;">
+            How Alzheimer’s Impacts Brain Anatomy
+        </h2>
+
+        <p style="color: var(--text-secondary); line-height: 1.7;">
+            Alzheimer’s Disease progressively damages key brain regions shown above. The hippocampal areas
+            within the limbic system are typically affected first, leading to memory loss. As degeneration
+            spreads to the cerebrum, reasoning, language, and sensory processing decline. Later stages
+            impact the thalamus and brainstem, affecting motor control, sleep regulation, and vital functions.
+            Understanding each region’s role helps visualize how cognitive decline develops over time.
+        </p>
+    </section>
+
+</div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

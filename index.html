@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroVytis - AI-Driven Alzheimer's Analysis Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+/* Brain Image Container */
+.hero-visualization {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Circular Glowing Brain Image */
+.floating-brain {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: floatUpDown 3.5s ease-in-out infinite;
+    box-shadow: 
+        0 0 25px rgba(0, 200, 255, 0.8),
+        0 0 45px rgba(0, 120, 255, 0.6),
+        0 0 65px rgba(0, 80, 255, 0.4);
+    border: 4px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Smooth Floating Animation */
+@keyframes floatUpDown {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0px); }
+}
+
+/* SECTION TITLES */
+.section-title {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #d4d4d4;
+    margin-bottom: 40px;
+}
+
+/* UNIVERSAL CARD STYLE */
+.glass-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 14px;
+    padding: 25px;
+    transition: 0.35s;
+}
+
+/* ---------------- HOW IT WORKS ---------------- */
+.how-section {
+    color: white;
+   
+    padding: 80px 20px;
+    background: radial-gradient(circle at center, #111827, #0b0f19);
+}
+
+.step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.step-card {
+    composes: glass-card;
+    text-align: center;
+     box-shadow: 0 3px 10px rgba(0,162,255,0.35);
+}
+
+.step-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,162,255,0.35);
+}
+
+.step-number {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(90deg, #00c2ff, #4760ff);
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+}/* WHY SECTION – WHITE BACKGROUND */
+.why-section {
+    padding: 80px 0;
+    background: #ffffff;     /* white background */
+    color: #000;   
+     margin-left: 15px;
+   margin-right: 15px;          /* black text */
+}
+
+/* Section Title & Subtitle */
+.why-section .section-title {
+    color: #000; 
+}
+
+.why-section .section-subtitle {
+    color: #444;
+}
+
+/* GRID */
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+/* CARD */
+.why-card {
+  
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 14px;
+    padding: 25px;
+    text-align: center;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Hover Effect */
+.why-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ICON */
+.why-icon {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+/* HEADINGS */
+.why-card h3 {
+    color: #000;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+}
+
+/* PARAGRAPH */
+.why-card p {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* ---------------- CTA ---------------- */
+.big-cta {
+    padding: 80px 0;
+    text-align: center;
+    background: linear-gradient(90deg, #00b5ff, #4656ff, #7b1aff);
+    color: white;
+}
+
+.big-cta h2 {
+    font-size: 2.3rem;
+}
+.big-cta p {
+    font-size: 1.1rem;
+    margin: 10px 0 20px;
+}
+
+/* BUTTON OVERRIDE */
+.big-cta .btn-primary {
+    padding: 12px 28px;
+    border-radius: 25px;
+}
+</style>
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+    <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+    <span class="logo-text">NeuroVytis</span>
+</div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                 <!-- LOGIN BUTTON -->
+            <a href="login.html" class="btn-login" style="
+                background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                color: white;
+                padding: 0.45rem 1.35rem;
+                border-radius: 2rem;
+                font-size: 0.95rem;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: 32px; 
+                margin-left: 10px;
+                line-height: 1;
+                text-decoration: none;
+                box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                Login
+            </a>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+<section class="hero">
+
+    <!-- Background Animation Canvas -->
+    <canvas id="heroAnimation"></canvas>
+
+    <div class="hero-content">
+        <h1 class="hero-title">Advanced Brain Health Analysis</h1>
+        <p class="hero-subtitle">AI-powered Alzheimer's detection and cognitive health monitoring</p>
+        <div class="hero-buttons">
+            <a href="features.html" class="btn btn-primary">Learn More</a>
+            <a href="brain-diet.html" class="btn btn-secondary">Healthy Brain Diet</a>
+        </div>
+    </div>
+
+    
+  <img 
+    src="./images/neurobg.jpeg" 
+    alt="Brain Image" 
+    class="floating-brain"
+    style="
+        position:absolute; 
+        right:10%; 
+        filter: drop-shadow(0 0 25px #4dd6ff) 
+                drop-shadow(0 0 55px #33c1ff) 
+                drop-shadow(0 0 85px #1aa7ff);
+    "
+>
+</section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Cutting-Edge Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🧬</div>
+                <h3>3D Brain Visualization</h3>
+                <p>Interactive 3D models showing brain structures and neurological changes</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Risk Prediction</h3>
+                <p>Machine learning algorithms predict Alzheimer's risk with high accuracy</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Data Analytics</h3>
+                <p>Comprehensive insights from EEG/MRI data and health metrics</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Progress Tracking</h3>
+                <p>Monitor cognitive decline and brain health over time</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>Educational Resources</h3>
+                <p>Learn about brain science and Alzheimer's prevention strategies</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Personalized Insights</h3>
+                <p>Get tailored recommendations based on your health profile</p>
+            </div>
+          
+        <div class="feature-card">
+            <div class="feature-icon">🗂️</div>
+            <h3>MRI & EEG Upload</h3>
+            <p>Upload brain scans for AI-enhanced segmentation, noise cleanup, and pattern extraction.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⏳</div>
+            <h3>Cognitive Timeline</h3>
+            <p>Visualize long-term neurological changes through an interactive health timeline.</p>
+        </div>
+        </div>
+    </section>
+<!-- HOW IT WORKS SECTION -->
+<section class="how-section">
+    <h2 class="section-title">How NeuroVytis Works</h2>
+    <p class="section-subtitle">A seamless 4-step path powered by medical imaging + AI</p>
+
+    <div class="step-grid">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Upload EEG/MRI Data</h3>
+            <p>Import scans or neural activity recordings securely.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>AI Processes Signals</h3>
+            <p>Deep learning models analyze cognitive biomarkers.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Visual Insights</h3>
+            <p>Interactive 3D brain maps highlight abnormalities.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <h3>Personalized Report</h3>
+            <p>Receive risk scores and prevention recommendations.</p>
+        </div>
+    </div>
+</section>
+
+<!-- WHY NEUROVYTIS -->
+<section class="why-section">
+    <h2 class="section-title"  s>Why Choose NeuroVytis?</h2>
+    <p class="section-subtitle">Designed for accuracy, usability, and early detection</p>
+
+    <div class="why-grid">
+        <div class="why-card">
+            <div class="why-icon">⚡</div>
+            <h3>Fast & Accurate AI</h3>
+            <p>High-precision neural biomarkers for early-stage detection.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon">🧠</div>
+            <h3>Interactive 3D Mapping</h3>
+            <p>Visualize deterioration patterns in real-time.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon">🔒</div>
+            <h3>Secure & Encrypted</h3>
+            <p>Your medical data is stored through strict encryption standards.</p>
+        </div>
+    </div>
+</section>
+    <!-- CTA Section -->
+    <section class="cta-section ">
+    <h2 class="cta-title">Stay Ahead of Cognitive Decline</h2>
+    <p class="cta-subtitle">
+        Early symptoms can be subtle — checking them regularly helps you detect changes before they progress.
+    </p>
+   <a href="symptom-checker.html" class="btn btn-primary">Check Symptoms</a>
+</section>
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+              
+<!-- Elfsight AI Chatbot | Untitled AI Chatbot -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5c5ba38c-fe21-41fd-900a-de86fea9c4d7" data-elfsight-app-lazy></div>
+  <!-- FOOTER --> 
+ 
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h3 class="footer-title">NeuroVytis</h3>
+            <p class="footer-desc">
+                AI-powered neurological insights, brain visualization, and predictive analytics 
+                to support early detection and cognitive health tracking.
+            </p>
+
+            <div class="footer-socials">
+                <a href="#" class="social-icon">🌐</a>
+                <a href="#" class="social-icon">🐦</a>
+                <a href="#" class="social-icon">📘</a>
+                <a href="#" class="social-icon">📸</a>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Platform</h4>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="brain-visualizer.html">3D Brain Model</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="ai-risk-predictor.html">AI Predictor</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Support</h4>
+            <ul>
+                <li><a href="help-center.html">Help Center</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h4 class="footer-heading">Contact</h4>
+            <p>Email: support@neurovytis.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p>Location: Bengaluru, India</p>
+            <a href="contact.html" class="footer-btn">Get in Touch</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>🧠 2025 NeuroVytis — Advancing Brain Health with AI.</p>
+    </div>
+</footer>
+<script>
+const canvas = document.getElementById("heroAnimation");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+// FEWER NODES + FASTER MOVEMENT + MORE SEPARATION
+let nodes = [];
+let totalNodes = 60;  // reduced from 110 → more separation
+
+for (let i = 0; i < totalNodes; i++) {
+    nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 1.1,  // much faster (was 0.55)
+        vy: (Math.random() - 0.5) * 1.1,
+        size: Math.random() * 2.4 + 1.4,
+        opacity: 0.65
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.shadowColor = "rgba(255,255,255,1)";
+    ctx.shadowBlur = 18;
+
+    // More separation → bigger line threshold
+    for (let i = 0; i < totalNodes; i++) {
+        for (let j = i + 1; j < totalNodes; j++) {
+            let dx = nodes[i].x - nodes[j].x;
+            let dy = nodes[i].y - nodes[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 170) {
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.38)";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    // draw glowing nodes
+    nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+
+        // bounce
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${n.opacity})`;
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+    <script src="script.js"></script>
+    <script src="3d-brain.js"></script>
+    
+</body>
+</html>

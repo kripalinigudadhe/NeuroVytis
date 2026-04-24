@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <!-- ⭐ NAVBAR ADDED HERE -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-logo">
+                <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+               <li><a href="settings.html" class="nav-link active">Settings</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+               
+
+                <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                   Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <!-- ⭐ END NAVBAR -->
+
+
+    <div class="app-layout">
+
+        <!-- SIDEBAR -->
+         <aside class="sidebar">
+            <h1 style="color: white;">Features</h1>
+            <nav class="sidebar-nav">
+ <a href="profile.html" class="sidebar-link ">👤 Profile</a>
+        <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle </a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link active">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <h1 class="page-title">Settings</h1>
+                <div class="top-bar-actions">
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
+                    <a href="profile.html" class="btn btn-small">Profile</a>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h2>Appearance</h2>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <span>Dark Mode</span>
+                                <p>Toggle between light and dark theme</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="darkModeToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h2>Notifications</h2>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <span>Email Notifications</span>
+                                <p>Receive updates and alerts via email</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <span>Push Notifications</span>
+                                <p>Receive browser notifications</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h2>Privacy & Security</h2>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <span>Two-Factor Authentication</span>
+                                <p>Add an extra layer of security to your account</p>
+                            </div>
+                            <button class="btn btn-small">Enable</button>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <span>Data Export</span>
+                                <p>Download a copy of your data</p>
+                            </div>
+                            <button class="btn btn-small">Export</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h2>Account</h2>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <span>Change Password</span>
+                                <p>Update your account password</p>
+                            </div>
+                            <button class="btn btn-small">Change</button>
+                        </div>
+                        <div class="setting-item danger">
+                            <div class="setting-label">
+                                <span>Delete Account</span>
+                                <p>Permanently delete your account and data</p>
+                            </div>
+                            <button class="btn btn-small btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // === Save Sidebar Scroll Position ===
+const sidebar = document.querySelector(".sidebar");
+
+if (sidebar) {
+    // Restore saved scroll position on page load
+    const savedPosition = localStorage.getItem("sidebar-scroll");
+    if (savedPosition) {
+        sidebar.scrollTop = parseInt(savedPosition);
+    }
+
+    // Save new scroll position whenever user scrolls
+    sidebar.addEventListener("scroll", () => {
+        localStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+    });
+}
+
+    </script>
+</body>
+</html>

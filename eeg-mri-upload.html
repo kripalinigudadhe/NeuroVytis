@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEG/MRI Upload - NeuroVytis</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>/* ========== USER SCANS SECTION ========== */
+.user-scans-section {
+    margin-top: 2rem;
+}
+
+.user-scans-section h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Scan cards grid */
+.scan-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual scan card */
+.scan-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.scan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Scan card details */
+.scan-card .scan-type {
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
+.scan-card .scan-date {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.scan-card .scan-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.scan-card .btn-view {
+    padding: 0.35rem 0.8rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.scan-card .btn-view:hover {
+    background: var(--primary);
+}
+
+/* ========== MODAL STYLING ========== */
+.scan-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.scan-modal-content {
+    background: var(--bg-primary);
+    border-radius: 1rem;
+    max-width: 600px;
+    width: 90%;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--error);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background: var(--primary);
+}
+    </style>
+</head>
+
+<!-- ⭐ NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="images/logo.png" alt="NeuroVytis Logo" class="nav-logo-img">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+            <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+            <li><a href="eeg-mri-upload.html" class="nav-link active">EEG-MRI Scans</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+
+            <a href="login.html" class="btn-login" style="
+                background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                color: white;
+                padding: 0.45rem 1.35rem;
+                border-radius: 2rem;
+                font-size: 0.95rem;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                height: 32px;
+                margin-left: 10px;
+                text-decoration: none;
+                box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);
+            ">Logout</a>
+        </ul>
+    </div>
+</nav>
+
+<!-- ⭐ MAIN LAYOUT -->
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h1 style="color: white;">Features</h1>
+        <nav class="sidebar-nav">
+            <a href="profile.html" class="sidebar-link">👤 Profile</a>
+            <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+            <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+            <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+            <a href="eeg-mri-upload.html" class="sidebar-link active">📤 Upload Data</a>
+            <a href="real-time-visualization.html" class="sidebar-link">📅 Daily Update</a>
+            <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                    <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+            <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+            <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle</a>
+            <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+            <a href="report.html" class="sidebar-link">📋 Reports</a>
+            <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+            <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+            <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+            <a href="alzheimers-stages.html" class="sidebar-link">📚 Alzheimer</a>
+            <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+            <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+            <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+            <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+        </nav>
+    </aside>
+
+    <!-- ⭐ MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="top-bar">
+            <h1 class="page-title">Upload Medical Data</h1>
+            <div class="top-bar-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <a href="profile.html" class="btn btn-small">Profile</a>
+            </div>
+        </div>
+
+        <!-- ⭐ TWO COLUMN LAYOUT -->
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        ">
+
+       <!-- ⭐ EEG FORM -->
+<div class="card" style="padding:2rem;">
+    <h2 style="color: var(--primary); margin-bottom: 1rem;">🧠 EEG Scan – Patient Input</h2>
+
+    <form id="eegForm">
+
+        <h3>Patient Details</h3>
+
+        <label>Patient Name</label>
+        <input type="text" class="input" name="patient_name">
+
+        <label>Age</label>
+        <input type="number" class="input" name="age">
+
+        <label>Gender</label>
+        <select class="input" name="gender">
+            <option>Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <label>Patient ID</label>
+        <input type="text" class="input" name="patient_id">
+
+        <label>Date of Scan</label>
+        <input type="date" class="input" name="scan_date">
+
+        <hr>
+
+        <h3>Clinical Info</h3>
+
+        <label>Symptoms</label>
+        <textarea class="input" name="symptoms"></textarea>
+
+        <label>Clinical History</label>
+        <textarea class="input" name="clinical_history"></textarea>
+
+        <label>Medications</label>
+        <textarea class="input" name="medications"></textarea>
+
+        <hr>
+
+        <h3>EEG Recording Info</h3>
+
+        <label>EEG Type</label>
+        <select class="input" name="eeg_type">
+            <option>Routine</option>
+            <option>Sleep-deprived</option>
+            <option>Video EEG</option>
+            <option>Long-term Monitoring</option>
+        </select>
+
+        <label>Activation Methods</label>
+        <select class="input" name="activation">
+            <option>None</option>
+            <option>Hyperventilation</option>
+            <option>Photic Stimulation</option>
+            <option>Sleep</option>
+        </select>
+
+        <label>Duration (minutes)</label>
+        <input type="number" class="input" name="duration">
+
+        <hr>
+
+        <h3>EEG Observations</h3>
+
+        <label>Background Rhythm</label>
+        <input type="text" class="input" name="background_rhythm">
+
+        <label>Abnormal Activity</label>
+        <select class="input" name="abnormal_activity">
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <label>Epileptiform Discharges</label>
+        <select class="input" name="epileptiform">
+            <option>None</option>
+            <option>Spikes</option>
+            <option>Sharp Waves</option>
+            <option>Spike-Wave</option>
+        </select>
+
+        <label>Seizures Recorded</label>
+        <select class="input" name="seizures">
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <label>Focal Abnormalities</label>
+        <input type="text" class="input" name="focal_abnormalities">
+
+        <label>Generalized Abnormalities</label>
+        <select class="input" name="generalized_abnormalities">
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <hr>
+
+        <h3>EEG Summary</h3>
+        <textarea class="input" name="summary"></textarea>
+
+        <button class="btn btn-primary full-width">Submit</button>
+
+    </form>
+</div>
+
+
+<!-- ⭐ MRI FORM -->
+<div class="card" style="padding:2rem;">
+    <h2 style="color: var(--accent); margin-bottom: 1rem;">🧲 MRI Brain Scan – Input</h2>
+
+    <form id="mriForm">
+
+        <h3>Patient Details</h3>
+
+        <label>Patient Name</label>
+        <input type="text" class="input" name="patient_name">
+
+        <label>Age</label>
+        <input type="number" class="input" name="age">
+
+        <label>Gender</label>
+        <select class="input" name="gender">
+            <option>Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <label>Patient ID</label>
+        <input type="text" class="input" name="patient_id">
+
+        <label>Date of Scan</label>
+        <input type="date" class="input" name="scan_date">
+
+        <hr>
+
+        <h3>Scan Details</h3>
+
+        <label>MRI Type</label>
+        <select class="input" name="mri_type">
+            <option>Brain</option>
+            <option>Contrast MRI</option>
+            <option>Volumetric</option>
+            <option>DTI</option>
+        </select>
+
+        <label>Scanner Strength</label>
+        <select class="input" name="scanner_strength">
+            <option>1.5T</option>
+            <option>3T</option>
+        </select>
+
+        <label>Sequences Taken</label>
+        <select class="input" name="sequences">
+            <option>T1</option>
+            <option>T2</option>
+            <option>FLAIR</option>
+            <option>DWI</option>
+            <option>SWI</option>
+            <option>Contrast</option>
+        </select>
+
+        <hr>
+
+        <h3>MRI Observations</h3>
+
+        <label>Brain Atrophy</label>
+        <select class="input" name="brain_atrophy">
+            <option>Normal</option>
+            <option>Mild</option>
+            <option>Moderate</option>
+            <option>Severe</option>
+        </select>
+
+        <label>Hippocampal Atrophy</label>
+        <select class="input" name="hippocampal_atrophy">
+            <option>None</option>
+            <option>Left</option>
+            <option>Right</option>
+        </select>
+
+        <label>White Matter Lesions</label>
+        <select class="input" name="white_matter_lesions">
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <label>Infarcts</label>
+        <select class="input" name="infarcts">
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <label>Hemorrhage</label>
+        <select class="input" name="hemorrhage">
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <label>Tumor / Mass</label>
+        <select class="input" name="tumor">
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <label>Hydrocephalus</label>
+        <select class="input" name="hydrocephalus">
+            <option>No</option>
+            <option>Yes</option>
+        </select>
+
+        <label>Midline Shift (mm)</label>
+        <input type="number" class="input" name="midline_shift_mm">
+
+        <label>Ventricular Size</label>
+        <input type="text" class="input" name="ventricular_size">
+
+        <label>Cortical Thickness</label>
+        <select class="input" name="cortical_thickness">
+            <option>Normal</option>
+            <option>Reduced</option>
+        </select>
+
+        <hr>
+
+        <h3>Alzheimer’s-Specific Metrics</h3>
+
+        <label>Hippocampal Volume</label>
+        <input type="text" class="input" name="hippocampal_volume">
+
+        <label>Medial Temporal Atrophy Score</label>
+        <input type="text" class="input" name="mta_score">
+
+        <label>Fazekas Score</label>
+        <input type="text" class="input" name="fazekas_score">
+
+        <label>Brain Volume (%)</label>
+        <input type="number" class="input" name="brain_volume">
+
+        <hr>
+
+        <h3>MRI Summary</h3>
+
+        <textarea class="input" name="summary" placeholder="Final MRI impression..."></textarea>
+
+        <button class="btn btn-primary full-width" type="submit">Submit</button>
+
+    </form>
+
+
+
+</div>
+
+            </div>
+    <!-- ⭐ USER SCANS CARDS -->
+<div id="userScans" class="user-scans-section enhanced-section">
+    <h2>Your Uploaded Scans</h2>
+    <div id="scanCards" class="scan-cards-container">
+        <!-- Dynamic scan cards inserted here -->
+    </div>
+     <!-- ⭐ EEG GALLERY SECTION -->
+        <div style="
+            background: linear-gradient(135deg, #2cbfec, #3853ff);
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-top: 2.5rem;
+            margin-bottom: 2rem;
+        ">
+            <h3>EEG Gallery (Alzheimer’s Patients)</h3>
+            <p style="color:white; margin-bottom: 1.8rem;">
+                Explore real-world EEG patterns showing abnormalities linked to Alzheimer’s progression.
+            </p>
+
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            ">
+                <!-- IMAGE 1 -->
+                <div class="card" style="background:var(--glass); padding:1rem;">
+                    <img src="https://www.researchgate.net/publication/322275630/figure/fig1/AS:962246041673760@1606428742973/EEGsignal-of-an-Alzheimer-patient.gif" style="width:100%; border-radius:0.7rem;">
+                    <p style="margin-top:0.7rem; color:white;">EEG slowing with reduced alpha waves — moderate Alzheimer’s.</p>
+                </div>
+
+                <!-- IMAGE 2 -->
+                <div class="card" style="background:var(--glass); padding:1rem;">
+                    <img src="https://storage.googleapis.com/dl.dentistrykey.com/clinical/TheEEGinotherneurologicalandmedicalconditionsandinstatusepilepticus/0_3s20B9780323353878000068.jpg" style="width:100%; border-radius:0.7rem;">
+                    <p style="margin-top:0.7rem; color:white;">Rhythmic delta waves — typical of temporo-parietal degeneration.</p>
+                </div>
+
+                <!-- IMAGE 3 -->
+                <div class="card" style="background:var(--glass); padding:1rem;">
+                    <img src="https://www.researchgate.net/publication/12124424/figure/fig1/AS:601757130440719@1520481488704/A-EEG-recording-showing-widespread-slow-wave-activity-in-association-with-opisthotonic.png" style="width:100%; border-radius:0.7rem;">
+                    <p style="margin-top:0.7rem; color:white;">Diffuse slow-wave activity — signal of advanced disease stage.</p>
+                </div>
+            </div>
+        </div>
+
+       
+    </main>
+</div>
+</div>
+
+<!-- ⭐ MODAL DIALOG -->
+<div id="scanModal" class="scan-modal">
+    <div class="scan-modal-content">
+        <button id="modalClose" class="modal-close-btn">×</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<style>
+/* =======================
+   GLOBAL IMPROVED SECTION
+   ======================= */
+
+.enhanced-section {
+    padding: 2rem;
+    border-radius: 1.5rem;
+    background: var(--bg-secondary);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    border: 1px solid var(--border-color);
+}
+
+/* ===== USER SCANS SECTION ===== */
+.user-scans-section h2 {
+    color: var(--primary);
+    font-size: 1.7rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Scan cards grid */
+.scan-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* Individual scan card */
+.scan-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 1.2rem;
+    padding: 1.6rem;
+    cursor: pointer;
+
+    /* NEW – Shadow + Smooth Hover */
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.scan-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(0,0,0,0.2);
+}
+
+.scan-type {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.scan-patient {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.scan-date {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0.6rem 0 1rem;
+}
+
+/* View Button */
+.btn-view {
+    padding: 0.45rem 1rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 0.6rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-view:hover {
+    background: var(--primary);
+}
+
+/* ===== MODAL STYLING ===== */
+.scan-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Modal box */
+.scan-modal-content {
+    background: var(--bg-primary);
+    border-radius: 1.2rem;
+    padding: 2.2rem;
+    width: 90%;
+    max-width: 650px;
+
+    /* NEW – Strong Shadow */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+}
+
+/* Close Button */
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--error);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.modal-close-btn:hover {
+    background: var(--primary);
+    transform: scale(1.1);
+}
+</style>
+
+        </div>
+
+        <!-- ⭐ INPUT STYLE -->
+        <style>
+            .input {
+                width: 100%;
+                padding: 0.6rem 0.8rem;
+                background: var(--glass);
+                border: 1px solid var(--border-color);
+                border-radius: 0.5rem;
+                margin-top: 0.35rem;
+                margin-bottom: 1rem;
+                color: var(--text-primary);
+            }
+        </style>
+
+       
+<script>
+document.getElementById("eegForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = Object.fromEntries(new FormData(e.target).entries());
+
+    let res = await fetch("http://localhost:5000/submit-eeg", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+    });
+
+    res = await res.json();
+    alert(res.message);
+});
+</script>
+
+<script>
+document.getElementById("mriForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const form = new FormData(e.target);
+    const data = Object.fromEntries(form.entries());
+
+    const res = await fetch("http://localhost:5000/submit-mri", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+        alert("MRI Scan Saved Successfully!");
+        e.target.reset();
+    } else {
+        alert("Error: " + result.message);
+    }
+});
+</script>
+
+
+<script>
+async function loadUserScans() {
+    const res = await fetch("http://localhost:5000/user-scans", { credentials: "include" });
+    const data = await res.json();
+
+    if (!data.success) return;
+
+    const container = document.getElementById("scanCards");
+    container.innerHTML = "";
+
+    // Add 'scan_type' property to distinguish
+    const eegScans = data.eeg.map(scan => ({ ...scan, scan_type: "EEG" }));
+    const mriScans = data.mri.map(scan => ({ ...scan, scan_type: "MRI" }));
+
+    const scans = [...eegScans, ...mriScans];
+
+    scans.forEach(scan => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.style = "padding:1rem; cursor:pointer; background: var(--glass); border-radius:0.7rem;";
+        card.innerHTML = `
+            <h3>${scan.scan_type} 🧑 ${scan.patient_name} - ${scan.scan_date}</h3>
+            <p>Click to view full details</p>
+        `;
+        card.addEventListener("click", () => openModal(scan));
+        container.appendChild(card);
+    });
+}
+
+
+
+// ⭐ Modal logic
+function openModal(scan) {
+    const modal = document.getElementById("scanModal");
+    const content = document.getElementById("modalContent");
+    modal.style.display = "flex";
+
+    content.innerHTML = `
+        <h2>${scan.scan_type} Scan - ${scan.patient_name} (${scan.scan_date})</h2>
+        <p><strong>Age:</strong> ${scan.age}</p>
+        <p><strong>Gender:</strong> ${scan.gender}</p>
+        <p><strong>Patient ID:</strong> ${scan.patient_id}</p>
+        <hr>
+        ${scan.scan_type === "EEG" ? `
+            <p><strong>EEG Type:</strong> ${scan.eeg_type}</p>
+            <p><strong>Activation Method:</strong> ${scan.activation_method}</p>
+            <p><strong>Duration:</strong> ${scan.duration_minutes} min</p>
+            <p><strong>Background Rhythm:</strong> ${scan.background_rhythm}</p>
+            <p><strong>Abnormal Activity:</strong> ${scan.abnormal_activity}</p>
+            <p><strong>Epileptiform Discharges:</strong> ${scan.epileptiform_discharges}</p>
+            <p><strong>Seizures Recorded:</strong> ${scan.seizures_recorded}</p>
+            <p><strong>Focal Abnormalities:</strong> ${scan.focal_abnormalities}</p>
+            <p><strong>Generalized Abnormalities:</strong> ${scan.generalized_abnormalities}</p>
+        ` : `
+            <p><strong>MRI Type:</strong> ${scan.mri_type}</p>
+            <p><strong>Scanner Strength:</strong> ${scan.scanner_strength}</p>
+            <p><strong>Sequences:</strong> ${scan.sequences}</p>
+            <p><strong>Brain Atrophy:</strong> ${scan.brain_atrophy}</p>
+            <p><strong>Hippocampal Atrophy:</strong> ${scan.hippocampal_atrophy}</p>
+            <p><strong>White Matter Lesions:</strong> ${scan.white_matter_lesions}</p>
+            <p><strong>Infarcts:</strong> ${scan.infarcts}</p>
+            <p><strong>Hemorrhage:</strong> ${scan.hemorrhage}</p>
+            <p><strong>Tumor / Mass:</strong> ${scan.tumor}</p>
+            <p><strong>Hydrocephalus:</strong> ${scan.hydrocephalus}</p>
+            <p><strong>Midline Shift:</strong> ${scan.midline_shift_mm} mm</p>
+            <p><strong>Ventricular Size:</strong> ${scan.ventricular_size}</p>
+            <p><strong>Cortical Thickness:</strong> ${scan.cortical_thickness}</p>
+            <p><strong>Hippocampal Volume:</strong> ${scan.hippocampal_volume}</p>
+            <p><strong>MTA Score:</strong> ${scan.mta_score}</p>
+            <p><strong>Fazekas Score:</strong> ${scan.fazekas_score}</p>
+            <p><strong>Brain Volume:</strong> ${scan.brain_volume}%</p>
+        `}
+        <hr>
+        <p><strong>Summary:</strong> ${scan.summary || "N/A"}</p>
+    `;
+}
+
+
+document.getElementById("modalClose").addEventListener("click", () => {
+    document.getElementById("scanModal").style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target.id === "scanModal") {
+        document.getElementById("scanModal").style.display = "none";
+    }
+});
+
+// Load cards on page load
+window.onload = loadUserScans;
+</script>
+<!-- SCRIPT FILE -->
+<script src="script.js"></script>
+
+</body>
+</html>

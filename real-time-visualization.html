@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Patient Update - NeuroVytis</title>
+<link rel="stylesheet" href="styles.css">
+
+<style>
+   .update-card {
+    background: var(--glass);
+    border: 1px solid var(--border-color);
+    border-radius: 1.2rem;
+    padding: 1.2rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    
+    /* 🔥 Important for grid */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    /* subtle glow */
+    backdrop-filter: blur(10px);
+}
+
+.update-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    border-color: rgba(122, 31, 255, 0.4);
+}
+
+/* HEADER */
+.card-header h3 {
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.card-header p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 2px 0;
+}
+
+/* DETAILS (EXPAND AREA) */
+.card-details {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Section titles inside expanded view */
+.card-details b {
+    color: var(--text-primary);
+}
+
+/* Divider */
+.card-details hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 0.5rem 0 0.8rem 0;
+}
+/* ================== FORM INPUT ================== */
+.input, select, textarea {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    background: var(--glass);
+    border: 1px solid var(--border-color);
+    border-radius: 0.55rem;
+    margin-top: 0.35rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+textarea { resize: vertical; }
+
+label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* ================== CARD ================== */
+.section-card {
+    background: var(--bg-secondary);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ================== SECTION HEADERS ================== */
+.section-title {
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* ================== GRID ================== */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ================== BUTTON ================== */
+button.btn-primary {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+    border-radius: 0.65rem;
+}
+</style>
+</head>
+
+<body>
+ <!-- ⭐ NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/logo.png" class="nav-logo-img">
+                <span class="logo-text">NeuroVytis</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="brain-visualizer.html" class="nav-link">Brain Visualizer</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="alzheimers-stages.html" class="nav-link active">Daily Update</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+
+  <a href="login.html" class="btn-login" style="
+                    background: linear-gradient(90deg, #00C2FF, #2E4BFF, #7A1FFF);
+                    color: white;
+                    padding: 0.45rem 1.35rem;
+                    border-radius: 2rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 32px;
+                    margin-left: 10px;
+                    line-height: 1;
+                    text-decoration: none;
+                    box-shadow: 0 3px 10px rgba(39, 70, 255, 0.3);">
+                    Logout
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+<div class="app-layout">
+ <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1 style="color:white;">Features</h1>
+            <nav class="sidebar-nav">
+                <a href="profile.html" class="sidebar-link">👤 Profile</a>
+                <a href="neural-pathway.html" class="sidebar-link">🔗 Neural Pathways</a>
+                <a href="brain-comparison.html" class="sidebar-link">⚖️ Brain Comparison</a>
+                <a href="ai-risk-predictor.html" class="sidebar-link">🤖 Risk Predictor</a>
+                <a href="eeg-mri-upload.html" class="sidebar-link">📤 Upload Data</a>
+                <a href="real-time-visualization.html" class="sidebar-link active">📅 Daily Update</a>
+                <a href="quiz.html" class="sidebar-link ">🧠 Cognitive Assessment</a>
+                            <a href="decline-graphs.html" class="sidebar-link">📊 Decline Tracking</a>
+                <a href="timeline-simulation.html" class="sidebar-link">⏳ Timeline</a>
+                <a href="lifestyle-simulation.html" class="sidebar-link">🏃 Lifestyle</a>
+                <a href="recommendations.html" class="sidebar-link">💡 Recommendation</a>
+                <a href="report.html" class="sidebar-link">📋 Reports</a>
+                <a href="predictive-alerts.html" class="sidebar-link">🚨 Alerts</a>
+                <a href="learning-modules.html" class="sidebar-link">🎓 Learning</a>
+                <a href="brain-anatomy.html" class="sidebar-link">🧬 Brain Anatomy</a>
+                <a href="alzheimers-stages.html" class="sidebar-link ">📚 Alzheimer</a>
+                <a href="prevention-tips.html" class="sidebar-link">🛡️ Prevention</a>
+                <a href="help-center.html" class="sidebar-link">❓ Help Center</a>
+                <a href="privacy-policy.html" class="sidebar-link">🔒 Privacy Policy</a>
+                <a href="settings.html" class="sidebar-link">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+<main class="main-content">
+
+<div class="top-bar">
+    <h1 class="page-title">Daily Alzheimer Patient Update</h1>
+    <div class="top-bar-actions">
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+         <a href="profile.html" class="btn btn-small">Profile</a>
+    </div>
+</div>
+
+<div style="margin:2rem auto; max-width:900px;">
+<div class="section-card">
+
+<form id="dailyUpdateForm">
+
+<label>Date</label>
+<input type="date" class="input" name="date" required>
+
+<!-- ================== COGNITIVE ================== -->
+<div class="section-title">🧠 Cognitive Status</div>
+<div class="grid-2">
+
+<select name="memory_issues" class="input">
+    <option value="None">Memory: None</option>
+    <option value="Mild">Mild</option>
+    <option value="Moderate">Moderate</option>
+    <option value="Severe">Severe</option>
+</select>
+
+<select name="orientation" class="input">
+    <option value="Fully Oriented">Orientation: Fully Oriented</option>
+    <option value="Partially Disoriented">Partially Disoriented</option>
+    <option value="Disoriented">Disoriented</option>
+</select>
+
+<select name="attention_span" class="input">
+    <option value="Normal">Attention: Normal</option>
+    <option value="Reduced">Reduced</option>
+    <option value="Poor">Poor</option>
+</select>
+
+<select name="speech_clarity" class="input">
+    <option value="Clear">Speech: Clear</option>
+    <option value="Slurred">Slurred</option>
+    <option value="Incoherent">Incoherent</option>
+</select>
+
+</div>
+
+<!-- ================== MOOD ================== -->
+<div class="section-title">😊 Mood & Behavior</div>
+<div class="grid-2">
+
+<select name="mood" class="input">
+    <option value="Stable">Mood: Stable</option>
+    <option value="Anxious">Anxious</option>
+    <option value="Depressed">Depressed</option>
+    <option value="Aggressive">Aggressive</option>
+</select>
+
+<select name="anxiety_level" class="input">
+    <option value="Low">Anxiety: Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+</select>
+
+<select name="hallucinations" class="input">
+    <option value="No">Hallucinations: No</option>
+    <option value="Yes">Yes</option>
+</select>
+
+<select name="social_withdrawal" class="input">
+    <option value="No">Social Withdrawal: No</option>
+    <option value="Yes">Yes</option>
+</select>
+
+</div>
+
+<!-- ================== HEALTH ================== -->
+<div class="section-title">💊 Health & Lifestyle</div>
+<div class="grid-2">
+
+<select name="medication_adherence" class="input">
+    <option value="Yes">Medication Taken: Yes</option>
+    <option value="No">No</option>
+</select>
+
+<select name="side_effects" class="input">
+    <option value="None">Side Effects: None</option>
+    <option value="Mild">Mild</option>
+    <option value="Severe">Severe</option>
+</select>
+
+<select name="sleep_quality" class="input">
+    <option value="Good">Sleep: Good</option>
+    <option value="Average">Average</option>
+    <option value="Poor">Poor</option>
+</select>
+
+<select name="hydration" class="input">
+    <option value="Adequate">Hydration: Adequate</option>
+    <option value="Low">Low</option>
+</select>
+
+</div>
+
+<!-- ================== FUNCTIONAL ================== -->
+<div class="section-title">🏃 Functional Ability</div>
+<div class="grid-2">
+
+<select name="daily_independence" class="input">
+    <option value="Independent">Independence: Independent</option>
+    <option value="Needs Assistance">Needs Assistance</option>
+    <option value="Dependent">Dependent</option>
+</select>
+
+<select name="mobility" class="input">
+    <option value="Normal">Mobility: Normal</option>
+    <option value="Assisted">Assisted</option>
+    <option value="Immobile">Immobile</option>
+</select>
+
+<select name="falls" class="input full-width">
+    <option value="No">Falls Today: No</option>
+    <option value="Yes">Yes</option>
+</select>
+
+</div>
+
+<!-- ================== NOTES ================== -->
+<div class="section-title">📝 Caregiver Notes</div>
+<textarea 
+    name="caregiver_notes" 
+    rows="4" 
+    class="input"
+    placeholder="Unusual behavior, medical concerns, emergencies..."
+></textarea>
+
+<button class="btn btn-primary">Save Daily Update</button>
+
+</form>
+</div>
+<div class="section-card" style="margin-top:2rem;">
+    <h2 class="section-title">📊 Previous Daily Updates</h2>
+    <div id="updatesList"></div>
+</div>
+</div>
+
+</main>
+</div>
+
+<script src="script.js"></script>
+<script>
+   async function loadUpdates() {
+    const res = await fetch("http://localhost:5000/daily-updates", {
+        credentials: "include"
+    });
+
+    const data = await res.json();
+    const container = document.getElementById("updatesList");
+    container.innerHTML = "";
+
+    if (!data.length) {
+        container.innerHTML = "<p>No updates found.</p>";
+        return;
+    }
+
+    data.forEach(update => {
+        const card = document.createElement("div");
+        card.className = "update-card";
+
+        card.innerHTML = `
+            <div class="card-header">
+                <h3>📅 ${formatDate(update.date)}</h3>
+                <p><b>Memory:</b> ${update.memory_issues}</p>
+                <p><b>Mood:</b> ${update.mood}</p>
+            </div>
+
+            <div class="card-details" style="display:none;">
+                <hr>
+
+                <p><b>🧠 Cognitive</b></p>
+                <p>Memory: ${update.memory_issues}</p>
+                <p>Orientation: ${update.orientation}</p>
+                <p>Attention: ${update.attention_span}</p>
+                <p>Speech: ${update.speech_clarity}</p>
+
+                <p><b>😊 Mood & Behavior</b></p>
+                <p>Mood: ${update.mood}</p>
+                <p>Anxiety: ${update.anxiety_level}</p>
+                <p>Hallucinations: ${update.hallucinations}</p>
+                <p>Social Withdrawal: ${update.social_withdrawal}</p>
+
+                <p><b>💊 Health</b></p>
+                <p>Medication: ${update.medication_adherence}</p>
+                <p>Side Effects: ${update.side_effects}</p>
+                <p>Sleep: ${update.sleep_quality}</p>
+                <p>Hydration: ${update.hydration}</p>
+
+                <p><b>🏃 Functional</b></p>
+                <p>Independence: ${update.daily_independence}</p>
+                <p>Mobility: ${update.mobility}</p>
+                <p>Falls: ${update.falls}</p>
+
+                <p><b>📝 Notes:</b> ${update.caregiver_notes || "None"}</p>
+            </div>
+        `;
+
+        // 🔥 CLICK TO TOGGLE DETAILS
+        card.addEventListener("click", () => {
+            const details = card.querySelector(".card-details");
+            details.style.display =
+                details.style.display === "none" ? "block" : "none";
+        });
+
+        container.appendChild(card);
+    });
+}
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
+}
+</script>
+<script>
+document.getElementById("dailyUpdateForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target).entries());
+
+    const res = await fetch("http://localhost:5000/daily-update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // 🔥 IMPORTANT
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+    alert(result.message);
+
+    e.target.reset();
+    loadUpdates(); // 🔥 refresh list
+});
+</script>
+
+</body>
+</html>

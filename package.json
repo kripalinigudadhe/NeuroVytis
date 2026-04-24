@@ -1,0 +1,25 @@
+{
+  "name": "my-v0-project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'no build script'"
+  },
+  "main": "3d-brain.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "fs": "^0.0.1-security",
+    "ml-random-forest": "^2.1.0",
+    "mysql2": "^3.15.3",
+    "node-fetch": "^2.7.0"
+  }
+}

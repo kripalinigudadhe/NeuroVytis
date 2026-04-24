@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Results - NeuroVytis</title>
+<link rel="stylesheet" href="styles.css">
+
+<style>
+.input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background: var(--primary-gradient);
+    color: white;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="images/logo.png" class="nav-logo-img">
+            <span class="logo-text">NeuroVytis</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            <li><a href="results.html" class="nav-link active">Results</a></li>
+            <a href="login.html" class="btn-login">Login</a>
+        </ul>
+    </div>
+</nav>
+
+<div class="app-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <h1 style="color:white;">Features</h1>
+    <nav class="sidebar-nav">
+        <a href="quiz.html" class="sidebar-link">🧠 Cognitive Assessment</a>
+        <a href="results.html" class="sidebar-link active">📈 Quiz Results</a>
+    </nav>
+</aside>
+
+<!-- MAIN -->
+<main class="main-content">
+
+<div class="container">
+
+<!-- 🔥 INPUT FORM -->
+<div style="background: var(--bg-secondary); padding: 2rem; border-radius: 1rem; margin-bottom: 2rem;">
+    <h3>Enter Quiz Data</h3>
+
+    <input type="number" id="scoreInput" placeholder="Total Score /100" class="input">
+    <input type="number" id="memoryInput" placeholder="Memory %" class="input">
+    <input type="number" id="attentionInput" placeholder="Attention %" class="input">
+    <input type="number" id="reasoningInput" placeholder="Reasoning %" class="input">
+
+    <button onclick="submitQuiz()" class="btn">Save Quiz</button>
+</div>
+
+<!-- LATEST SCORE -->
+<div style="background: var(--bg-secondary); padding: 2rem; border-radius: 1rem; margin-bottom: 2rem;">
+    <h3>Latest Score</h3>
+    <div style="text-align:center;">
+        <div id="latestScore" style="font-size:3rem;"></div>
+        <p id="latestConclusion"></p>
+    </div>
+</div>
+
+<!-- DOMAIN SCORES -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;">
+    <div class="card"><h4>Memory</h4><div id="memoryScore">0%</div></div>
+    <div class="card"><h4>Attention</h4><div id="attentionScore">0%</div></div>
+    <div class="card"><h4>Reasoning</h4><div id="reasoningScore">0%</div></div>
+</div>
+
+<!-- HISTORY -->
+<div style="background: var(--bg-secondary); padding: 2rem; border-radius: 1rem;">
+    <h3>History</h3>
+    <div id="historyContainer"></div>
+</div>
+
+</div>
+</main>
+</div>
+
+<script>
+
+// 🔥 Generate conclusion
+function generateConclusion(score) {
+    if (score >= 80) return "🟢 Excellent Cognitive Health";
+    if (score >= 50) return "🟡 Moderate Cognitive Performance";
+    return "🔴 Risk Detected - Improvement Needed";
+}
+
+// 🔥 Submit Quiz
+async function submitQuiz() {
+    const score = document.getElementById("scoreInput").value;
+    const memory = document.getElementById("memoryInput").value;
+    const attention = document.getElementById("attentionInput").value;
+    const reasoning = document.getElementById("reasoningInput").value;
+
+    const conclusion = generateConclusion(score);
+
+    const res = await fetch("http://localhost:5000/save-quiz-result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+            score,
+            memory,
+            attention,
+            reasoning,
+            conclusion
+        })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+        alert("✅ Saved Successfully");
+        loadResults();
+    } else {
+        alert("❌ Error");
+    }
+}
+
+// 🔥 Load Results
+async function loadResults() {
+    const latestScoreEl = document.getElementById("latestScore");
+    const latestConclusionEl = document.getElementById("latestConclusion");
+    const memoryEl = document.getElementById("memoryScore");
+    const attentionEl = document.getElementById("attentionScore");
+    const reasoningEl = document.getElementById("reasoningScore");
+    const historyContainer = document.getElementById("historyContainer");
+
+    const res = await fetch("http://localhost:5000/get-quiz-results", {
+        credentials: "include"
+    });
+
+    const data = await res.json();
+
+    if (!data.success || !data.results.length) {
+        latestScoreEl.textContent = "No Data";
+        return;
+    }
+
+    const latest = data.results[0];
+
+    latestScoreEl.textContent = latest.score + "/100";
+    latestConclusionEl.textContent = latest.conclusion;
+
+    memoryEl.textContent = latest.memory_score + "%";
+    attentionEl.textContent = latest.attention_score + "%";
+    reasoningEl.textContent = latest.reasoning_score + "%";
+
+    historyContainer.innerHTML = "";
+
+    data.results.forEach(r => {
+        const div = document.createElement("div");
+        div.style = "padding:10px;margin:5px 0;background:var(--glass);border-radius:8px;display:flex;justify-content:space-between;";
+        div.innerHTML = `
+            <span>${new Date(r.date_taken).toLocaleDateString()}</span>
+            <strong>${r.score}/100</strong>
+        `;
+        historyContainer.appendChild(div);
+    });
+}
+
+// Load on start
+document.addEventListener("DOMContentLoaded", loadResults);
+
+</script>
+
+</body>
+</html>
